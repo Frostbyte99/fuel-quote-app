@@ -19,9 +19,11 @@ const useForm = () => {
       [name]: value,
     });
   };
-  
+
   // Prevent re-loading when submitting form
   const handleSubmit = (e) => {
+    console.log("Form submitted!");
+    console.log(values);
     e.preventDefault();
   };
 

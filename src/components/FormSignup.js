@@ -3,7 +3,7 @@ import useForm from "./useForm";
 
 /**
  * Form where the user can signup for the website
- * 
+ *
  * Values in form:
  * username
  * email

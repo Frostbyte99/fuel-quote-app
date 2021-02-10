@@ -31,21 +31,21 @@ function App() {
 
   return (
     <div className="App">
-      <Form/>
-    </div>  
-    
-  //   <div className="App">
-  //     {user.email !== "" ? (
-  //       <div className="welcome">
-  //         <h2>
-  //           Welcome, <span>{user.name}</span>
-  //         </h2>
-  //         <button>Logout</button>
-  //       </div>
-  //     ) : (
-  //       <LoginForm Login={Login} error={error} />
-  //     )}
-  //   </div>
+      <Form />
+    </div>
+
+    //   <div className="App">
+    //     {user.email !== "" ? (
+    //       <div className="welcome">
+    //         <h2>
+    //           Welcome, <span>{user.name}</span>
+    //         </h2>
+    //         <button>Logout</button>
+    //       </div>
+    //     ) : (
+    //       <LoginForm Login={Login} error={error} />
+    //     )}
+    //   </div>
   );
 }
 
