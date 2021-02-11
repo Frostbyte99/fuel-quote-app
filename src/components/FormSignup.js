@@ -1,5 +1,6 @@
 import React from "react";
 import useForm from "./useForm";
+import { Link } from "react-router-dom";
 
 /**
  * Form where the user can signup for the website
@@ -13,6 +14,9 @@ import useForm from "./useForm";
 
 const FormSignup = () => {
   const { handleChange, values, handleSubmit } = useForm();
+  const loginStyle = {
+    color: "blue",
+  };
 
   return (
     <div className="form-content-right">
@@ -69,7 +73,7 @@ const FormSignup = () => {
             type="password"
             className="form-input"
             name="password2"
-            placeholder="Enter your password2"
+            placeholder="Re-Enter your password"
             value={values.password2}
             onChange={handleChange}
           />
@@ -78,7 +82,10 @@ const FormSignup = () => {
           Sign up
         </button>
         <span className="form-input-login">
-          Already have an account? Login <a href="#">here</a>
+          Already have an account? Login{" "}
+          <Link style={loginStyle} to="/">
+            here
+          </Link>
         </span>
       </form>
     </div>
