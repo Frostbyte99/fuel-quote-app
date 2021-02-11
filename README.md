@@ -10,6 +10,12 @@ Simple webapp for purchasing fuel based on a clients locations and history.
 * Run 'npm install' to install all dependencies
 * Finally to run the app, simple put 'npm start' and itll automatically reload when you make changes to source
 
+## Pages URL
+* Log in: http://localhost:3000/
+* Sign up: http://localhost:3000/signup
+* Fuel quote from: http://localhost:3000/fuelquote
+* Client profile form: http://localhost:3000/clientprofile
+
 ## ToDo Lists
 
 ### Forms
