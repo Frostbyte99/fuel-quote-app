@@ -1,64 +1,57 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Form used to log the user into the site
-function LoginForm({ Login, error }) {
-  // Local variable to store user info
-  const [details, setDeails] = useState({ name: "", email: "", password: "" });
+const Login = (props) => {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState('');
 
-  // Will pass the login information to the login event when the "Login" button is pressed
-  const submitHandler = (e) => {
-    e.preventDefault();
-    Login(details);
-  };
+    const onSubmit = (event) => {
+        event.preventDefault();
+        props.history.push('/fuelquote');
+    };
 
-  return (
-    <form onSubmit={submitHandler}>
-      <div className="form-inner">
-        <h2>Login</h2>
-        {/* Error /*/}
+    const divStyle = {
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+      };
 
-        {/*Form to input name*/}
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            onChange={(e) => setDeails({ ...details, name: e.target.value })}
-            value={details.name}
-          />
+      return (
+        <div style={divStyle} className="text-center flex-direction mt-0 p-4 w-25 flex-column container bg-light border rounded">
+          <h4> Welcome! </h4>
+          <form onSubmit={onSubmit} className="border-0 d-flex align-items flex-column mx-auto w-100">
+            <label className="text-left mb-0">Email</label>
+            <input className="w-100 mb-0"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
+              required
+            />
+            <label className="text-left mb-0">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.currentTarget.value)}
+              required
+            />
+            <input className="bg-primary border-primary text-white mt-2" type="submit" value="Log In" />
+          </form>
+          <small>Don&apos;t have an account? Sign up
+            <Link to="/signup"> here</Link>
+          </small>
         </div>
+      );
+    };
 
-        {/*Form to input email*/}
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            onChange={(e) => setDeails({ ...details, email: e.target.value })}
-            value={details.email}
-          />
-        </div>
+    Login.propTypes = {
+        history: PropTypes.string.isRequired,
+    };
 
-        {/*Form to input password*/}
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={(e) =>
-              setDeails({ ...details, password: e.target.value })
-            }
-            value={details.password}
-          />
-        </div>
-
-        <input type="submit" value="Login" />
-      </div>
-    </form>
-  );
-}
-
-export default LoginForm;
+    export default Login;
