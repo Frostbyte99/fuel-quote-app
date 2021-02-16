@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import useForm from "./useForm";
 
 const ClientProfileForm = () => {
@@ -10,25 +9,25 @@ const ClientProfileForm = () => {
             <h2>Your Profile</h2>
             <div className="full-name">
                 <label htmlFor="name">Full Name:</label>
-                <input type="text" id="name" name="name" maxLength="50"
+                <input type="text" id="name" name="name" maxLength="50" size="50"
                     value={values.fullname} onChange={handleChange} required/>
             </div>
             {/*Store address-1 and address-2 -> 1 string variable for FuelQuoteForm's DeliveryAddress*/}
             <div className="address">
                 <div>
                     <label htmlFor="address-1">Address 1:</label>
-                    <input type="text" id="address-1" name="address-1" maxLength="100"
+                    <input type="text" id="address-1" name="address-1" maxLength="100" size="100"
                         value={values.addr1} onChange={handleChange} required/>
                 </div>
                 <div>
                     <label htmlFor="address-2">Address 2:</label>
-                    <input type="text" id="address-2" name="address-2" maxLength="100"
+                    <input type="text" id="address-2" name="address-2" maxLength="100" size="100"
                         value={values.addr2} onChange={handleChange} />
                 </div>
             </div>
             <div className="city">
                 <label htmlFor="city">City:</label>
-                <input type="text" id="city" name="city" maxLength="100"
+                <input type="text" id="city" name="city" maxLength="100" size="100"
                     value={values.city} onChange={handleChange} required/>
             </div>
             <div className="state">
@@ -89,7 +88,7 @@ const ClientProfileForm = () => {
             </div>
             <div className="zipcode">
                 <label htmlFor="zipcode">Zipcode:</label>
-                <input type="text" id="zipcode" name="zipcode" maxLength="9" required
+                <input type="text" id="zipcode" name="zipcode" maxLength="9" size="10" required
                     pattern="[0-9]{5}|[0-9]{9}" value={values.zipcode} onChange={handleChange} />
             </div>
             <input type="submit" onClick={handleSubmit} value="Enter"/>
