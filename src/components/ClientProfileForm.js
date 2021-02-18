@@ -66,14 +66,10 @@ const ClientProfileForm = (props) => {
         }
         
     };
-    /*
-    const divStyle = {
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-    };
-    */
+
+   const onStateSelect = (event, state) => {
+        setState(state.abbreviation);
+   }
 
     return (
         <div>
@@ -142,7 +138,7 @@ const ClientProfileForm = (props) => {
                                 <small> { errors.city } </small>
                             </p>
                             <label className="text-left mb-0">State</label>
-                            <StatesSelect value={state} className="w-100 mb-3" onChange={(e) => setState(e.currentTarget.value)} />
+                            <StatesSelect value={state} className="w-100 mb-3" onChange={onStateSelect} />
                             <label className="text-left mb-0">Zip code</label>
                             <input className="w-100 mb-0"
                             type="text"
