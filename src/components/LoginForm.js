@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Login = (props) => {
+const LoginForm = (props) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState('');
 
@@ -50,8 +49,4 @@ const Login = (props) => {
       );
     };
 
-    Login.propTypes = {
-        history: PropTypes.string.isRequired,
-    };
-
-    export default Login;
+    export default LoginForm;

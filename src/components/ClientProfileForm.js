@@ -158,6 +158,6 @@ const ClientProfileForm = (props) => {
 
 ClientProfileForm.propTypes = {
     history: PropTypes.string.isRequired,
-  };
+};
 
 export default ClientProfileForm;
