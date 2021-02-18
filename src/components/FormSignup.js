@@ -1,21 +1,34 @@
-import React from "react";
-import useForm from "./useForm";
+import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { Link } from "react-router-dom";
 
-/**
- * Form where the user can signup for the website
- *
- * Values in form:
- * username
- * email
- * password
- * password2 <termporary, just used to confirm password>
- */
-
 const FormSignup = () => {
-  const { handleChange, values, handleSubmit } = useForm();
+  
   const loginStyle = {
     color: "blue",
+  };
+
+  const [errors, setErrors] = useState({});
+
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    console.log("Form submitted!");
+    console.log(values);
+    e.preventDefault();
   };
 
   return (
