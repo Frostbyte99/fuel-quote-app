@@ -59,8 +59,7 @@ const ClientProfileForm = (props) => {
                 state,
                 zipCode
             };
-            console.log("client" + JSON.stringify(clientInformationObject));
-            localStorage.setItem('clientInformation', JSON.stringify(clientInformation));
+            localStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
             // redirect to Fuel Quote Page
             props.history.push('/fuelquote');
         }
