@@ -20,7 +20,6 @@ const FuelQuoteForm = (props) => {
             pricePerGallon,
             totalPrice
         };
-        console.log(JSON.stringify(fuelQuote));
         localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuote));
         // redirect to Fuel Quote History Page
         props.history.push('/fuelquote/history');
