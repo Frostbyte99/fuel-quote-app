@@ -3,10 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
 const FormSignup = () => {
-  
-  const loginStyle = {
-    color: "blue",
-  };
 
   const divStyle = {
     position: 'absolute',
