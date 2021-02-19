@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import StatesSelect from "react-form-states-select";
 import NavBar from "./NavBar";
+import "../test.css";
 
 const ClientProfileForm = (props) => {
     const [fullName, setFullName] = useState();
@@ -62,7 +63,7 @@ const ClientProfileForm = (props) => {
    }
 
     return (
-        <div>
+        <div className="testClass">
             <NavBar/>
             <div className="text-center flex-direction mt-3 p-3 w-50 flex-column container bg-light border rounded">
                 <form onSubmit={onSubmit} className="border-0 d-flex align-items-center flex-column mx-auto w-100">
