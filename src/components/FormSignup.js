@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
-const FormSignup = () => {
+const FormSignup = (props) => {
 
   const divStyle = {
     position: 'absolute',
@@ -34,6 +34,9 @@ const FormSignup = () => {
     e.preventDefault();
     // TODO: add input validation
     // TODO: save account information
+
+    // Redirect to login page to complete account setup
+    props.history.push('/');
 
   };
 
