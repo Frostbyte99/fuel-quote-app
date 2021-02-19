@@ -42,7 +42,7 @@ const FormSignup = (props) => {
 
   return (
     <div style={divStyle} className="text-center flex-direction mt-0 p-4 w-25 flex-column container bg-light border rounded">
-      <h2>Please fill out the information below to make an account</h2>
+      <h3>Please fill out the information below to make an account</h3>
       <form className="border-0 d-flex align-items flex-column mx-auto w-100" onSubmit={handleSubmit}>
           <label htmlFor="username" className="text-left mb-0">
             Username
