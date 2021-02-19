@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
 const FormSignup = () => {
   
   const loginStyle = {
     color: "blue",
+  };
+
+  const divStyle = {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
   };
 
   const [errors, setErrors] = useState({});
@@ -29,78 +36,65 @@ const FormSignup = () => {
     console.log("Form submitted!");
     console.log(values);
     e.preventDefault();
+    // TODO: add input validation
+    // TODO: save account information
+
   };
 
   return (
-    <div className="form-content-right">
-      <form className="form" onSubmit={handleSubmit}>
-        <h1>Signup form</h1>
-        <div className="form-inputs">
-          <label htmlFor="username" className="form-label">
+    <div style={divStyle} className="text-center flex-direction mt-0 p-4 w-25 flex-column container bg-light border rounded">
+      <h2>Please fill out the information below to make an account</h2>
+      <form className="border-0 d-flex align-items flex-column mx-auto w-100" onSubmit={handleSubmit}>
+          <label htmlFor="username" className="text-left mb-0">
             Username
           </label>
-          <input
+          <input className="w-100 mb-0"
             id="username"
             type="text"
-            className="form-input"
             name="username"
             placeholder="Enter your username"
             value={values.username}
             onChange={handleChange}
           />
-        </div>
-        <div className="form-inputs">
-          <label htmlFor="email" className="form-label">
+          <label htmlFor="email" className="text-left mb-0">
             Email
           </label>
           <input
             id="email"
             type="email"
-            className="form-input"
             name="email"
             placeholder="Enter your email"
             value={values.email}
             onChange={handleChange}
           />
-        </div>
-        <div className="form-inputs">
-          <label htmlFor="password" className="form-label">
+          <label htmlFor="password" className="text-left mb-0">
             Password
           </label>
           <input
             id="password"
             type="password"
-            className="form-input"
             name="password"
             placeholder="Enter your password"
             value={values.password}
             onChange={handleChange}
           />
-        </div>
-        <div className="form-inputs">
-          <label htmlFor="password2" className="form-label">
+          <label htmlFor="password2" className="text-left mb-0">
             Confirm your password
           </label>
           <input
             id="password2"
             type="password"
-            className="form-input"
             name="password2"
             placeholder="Re-Enter your password"
             value={values.password2}
             onChange={handleChange}
           />
-        </div>
-        <button className="form-input-btn" type="submit">
-          Sign up
-        </button>
-        <span className="form-input-login">
-          Already have an account? Login{" "}
-          <Link style={loginStyle} to="/">
-            here
-          </Link>
-        </span>
+        <input className="bg-primary border-primary text-white mt-2" type="submit" value="Signup"/>
       </form>
+      <small>
+      Already have an account? Log in
+        <Link to="/"> here</Link>
+      </small>
     </div>
   );
 };
