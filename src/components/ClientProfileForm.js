@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import StatesSelect from "react-form-states-select";
 import NavBar from "./NavBar";
-import "../test.css";
+import "../styles.css";
 
 const ClientProfileForm = (props) => {
     const [fullName, setFullName] = useState();
