@@ -4,46 +4,39 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import StatesSelect from "react-form-states-select";
 import NavBar from "./NavBar";
 
-
 const ClientProfileForm = (props) => {
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
+    const [fullName, setFullName] = useState();
     const [address1, setAddress1] = useState();
     const [address2, setAddress2] = useState();
     const [city, setCity]= useState();
     const [state, setState] = useState();
     const [zipCode, setZipCode] = useState();
-    const [errors, setErrors] = useState({firstName: '', lastName: '', address1: '', address2: '', city: ''});
+    const [errors, setErrors] = useState({fullName: '', address1: '', address2: '', city: ''});
 
     const onSubmit = (event) => {
         event.preventDefault();
         let isInputsValid = true;
-        let firstNameError = "", lastNameError = "", address1Error = "", address2Error = "", cityError = "";
-        if(firstName.length > 25 ) {
-            firstNameError = "Must be less than 25 of characters.";
-            isInputsValid = false;
-        }
-        if(lastName.length > 25 ) {
-            lastNameError = "Must be less than 25 of characters.";
+        let fullNameError = "", address1Error = "", address2Error = "", cityError = "";
+        if(fullName.length > 50 ) {
+            fullNameError = "Must be less than 50 characters.";
             isInputsValid = false;
         }
         if(address1.length > 100) {
-            address1Error = "Must be less than 100 of characters.";
+            address1Error = "Must be less than 100 characters.";
             isInputsValid = false;
         }
         // address2 may not exist(optional)
         if(address2 && address2.length > 100) {
-            address2Error = "Must be less than 100 of characters.";
+            address2Error = "Must be less than 100 characters.";
             isInputsValid = false;
         }
         if(city.length > 100) {
-            cityError = "Must be less than 100 of characters.";
+            cityError = "Must be less than 100 characters.";
             isInputsValid = false;
         }
         if(!isInputsValid) {
             setErrors({
-                firstName: firstNameError,
-                lastName: lastNameError,
+                fullName: fullNameError,
                 address1: address1Error,
                 address2: address2Error,
                 city: cityError,
@@ -51,8 +44,7 @@ const ClientProfileForm = (props) => {
         }
         else {
             const clientInformationObject = {
-                firstName,
-                lastName,
+                fullName,
                 address1,
                 address2,
                 city,
@@ -63,7 +55,6 @@ const ClientProfileForm = (props) => {
             // redirect to Fuel Quote Page
             props.history.push('/fuelquote');
         }
-        
     };
 
    const onStateSelect = (event, state) => {
@@ -77,28 +68,17 @@ const ClientProfileForm = (props) => {
                 <form onSubmit={onSubmit} className="border-0 d-flex align-items-center flex-column mx-auto w-100">
                     <div className="row align-items-center text-left">
                         <div className="col">
-                            <p className="mb-0 text-center"><strong> Personal Information </strong></p>
-                            <label className="text-left mb-0">First Name</label>
+                            <p className="mb-0 text-center"><strong>Personal Information</strong></p>
+                            <label className="text-left mb-0">Full Name</label>
                             <input className="w-100 mb-0"
                             type="text"
-                            name="firstName"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.currentTarget.value)}
+                            name="fullName"
+                            value={fullName}
+                            onChange={(e) => setFullName(e.currentTarget.value)}
                             required
                             />
                             <p className="text-danger">
-                                <small> { errors.firstName } </small>
-                            </p>
-                            <label className="text-left mb-0">Last Name</label>
-                            <input className="w-100 mb-0"
-                            type="text"
-                            name="lastName"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.currentTarget.value)}
-                            required
-                            />
-                            <p className="text-danger">
-                                <small> { errors.lastName } </small>
+                                <small> { errors.fullName } </small>
                             </p>
                         </div>
                         <div className="col">
@@ -143,6 +123,7 @@ const ClientProfileForm = (props) => {
                             type="text"
                             name="zipcode"
                             value={zipCode}
+                            pattern="[0-9]{5}|[0-9]{9}"
                             onChange={(e) => setZipCode(e.currentTarget.value)}
                             required
                             />
