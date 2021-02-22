@@ -1,3 +1,6 @@
 .testClass {
     background-color: black;
 }
+.readonly {
+    color: #555;
+}
