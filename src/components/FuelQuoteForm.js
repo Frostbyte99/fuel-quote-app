@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
 import "../styles.css";
 
-const FuelQuoteForm = (props) => {
+const FuelQuoteForm = () => {
     const [deliveryDate, setDeliveryDate] = useState();
     const [gallons, setGallons] = useState();
     const [totalPrice, setTotalPrice] = useState();
@@ -15,15 +15,22 @@ const FuelQuoteForm = (props) => {
         event.preventDefault();
         const fuelQuote = {
             clientInfo,
-            gallons,
             deliveryDate,
-            pricePerGallon,
+            gallons,
+            //pricePerGallon,
             totalPrice
         };
         localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuote));
+        clearFuelQuote();
         //console.log(JSON.stringify(fuelQuote));
         //? redirect to Fuel Quote History Page
         //props.history.push('/fuelquote/history');
+    }
+
+    const clearFuelQuote = () => {
+        setDeliveryDate("");
+        setGallons("");
+        setTotalPrice(0);
     }
 
     const handleGallonChange = (g) => {
