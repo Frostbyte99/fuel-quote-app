@@ -32,7 +32,9 @@ const FormSignup = (props) => {
     console.log("Form submitted!");
     console.log(values);
     e.preventDefault();
-    // TODO: add input validation
+    
+    
+
     // TODO: save account information
 
     // Redirect to login page to complete account setup
@@ -54,17 +56,9 @@ const FormSignup = (props) => {
             placeholder="Enter your username"
             value={values.username}
             onChange={handleChange}
-          />
-          <label htmlFor="email" className="text-left mb-0">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            value={values.email}
-            onChange={handleChange}
+            required
+            pattern="[A-Za-z0-9]+"
+            title="Only letters and numbers"
           />
           <label htmlFor="password" className="text-left mb-0">
             Password
@@ -76,6 +70,9 @@ const FormSignup = (props) => {
             placeholder="Enter your password"
             value={values.password}
             onChange={handleChange}
+            required
+            pattern="[A-Za-z0-9]+"
+            title="Only letters and numbers"
           />
           <label htmlFor="password2" className="text-left mb-0">
             Confirm your password
@@ -87,6 +84,9 @@ const FormSignup = (props) => {
             placeholder="Re-Enter your password"
             value={values.password2}
             onChange={handleChange}
+            required
+            pattern="[A-Za-z0-9]+"
+            title="Only letters and numbers"
           />
         <input className="bg-primary border-primary text-white mt-2" type="submit" value="Signup"/>
       </form>
