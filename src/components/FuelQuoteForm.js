@@ -21,8 +21,9 @@ const FuelQuoteForm = (props) => {
             totalPrice
         };
         localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuote));
-        // redirect to Fuel Quote History Page
-        props.history.push('/fuelquote/history');
+        //console.log(JSON.stringify(fuelQuote));
+        //? redirect to Fuel Quote History Page
+        //props.history.push('/fuelquote/history');
     }
 
     const handleGallonChange = (g) => {
@@ -31,8 +32,9 @@ const FuelQuoteForm = (props) => {
         }
         if(Number.isInteger(g*1000))
         {
-            setGallons(g.replace(/^0*([0-9]+)(.[0-9]{0,3})?0*/, "$1$2")); //trims leading & trailing 0's
-            setTotalPrice(parseFloat(g * pricePerGallon).toFixed(2));
+            //Trim leading & trailing 0's. Format: g = [i or i.###] (where i = floor[g], # = [0-9 or ""])
+            setGallons(g.replace(/^0*([0-9]+)(.[0-9]{1,3})?0*/, "$1$2"));
+            setTotalPrice(parseFloat(g * pricePerGallon).toFixed(2)); //totalPrice = i.## (# = [0-9])
         }
     }
 
@@ -43,27 +45,28 @@ const FuelQuoteForm = (props) => {
                 <h2>Enter Your Fuel Quote</h2>
                 <div className="form-group-readonly">
                     <label htmlFor="toAddr">Delivery Address:</label>
-                    <input type="text" name="toAddr" id="toAddr" value={address} readonly required />
+                    <input type="text" name="toAddr" id="toAddr" className="readonly"
+                        value={address} readonly required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="delivery-date">Delivery Date:</label>
-                    <input type="date" name="delivery-date" id="delivery-date"
-                        value={deliveryDate} onChange={(e) => setDeliveryDate(e.currentTarget.value)} required />
+                    <input type="date" name="delivery-date" id="delivery-date" value={deliveryDate}
+                        onChange={(e) => setDeliveryDate(e.currentTarget.value)} required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="gallons">Gallons:</label>
                     <input type="number" name="gallons" id="gallons" value={gallons} min="0" max="1000000"
-                        onChange={(e) => handleGallonChange(e.currentTarget.value)} required />
+                        onChange={(e) => handleGallonChange(e.currentTarget.value)} step="any" required />
                 </div>
                 <div className="form-group-readonly">
                     <label htmlFor="price-per-gallon">Price/Gallon:</label>
-                    <input type="text" name="price-per-gallon" id="price-per-gallon" //value="$2.19 9/10"
+                    <input type="text" name="price-per-gallon" id="price-per-gallon" className="readonly"
                         value={`$${Math.floor(pricePerGallon*100)/100} ${(pricePerGallon*1000)%10}/10`}
                         readonly required />
                 </div>
                 <div className="form-group-readonly">
                     <label htmlFor="total-price">Total Price:</label>
-                    <input type="text" name="total-price" id="total-price"
+                    <input type="text" name="total-price" id="total-price" className="readonly"
                         value={`$${totalPrice || "0.00"}`} readonly required />
                 </div>
                 {/*gallons, price-per-gallon should have 3 decimal places: #.###*/}
