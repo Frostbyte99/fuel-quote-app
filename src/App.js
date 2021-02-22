@@ -5,6 +5,7 @@ import Signup from './components/FormSignup';
 import Login from './components/LoginForm';
 import ClientProfile from './components/ClientProfileForm';
 import FuelQuote from './components/FuelQuoteForm';
+import FuelQuoteHistory from './components/FuelQuoteHistory';
 
 const App = () => (
     <Switch>
@@ -12,8 +13,8 @@ const App = () => (
         <Route path="/Signup" exact component={Signup} />
         <Route path="/ClientProfile" exact component={ClientProfile} />
         <Route path="/FuelQuote" exact component={FuelQuote} />
+        <Route path="/FuelQuoteHistory" exact component={FuelQuoteHistory} />
     </Switch>
 );
 
 export default App;
-
