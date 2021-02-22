@@ -11,13 +11,13 @@ const ClientProfileForm = (props) => {
     const [address2, setAddress2] = useState();
     const [city, setCity]= useState();
     const [state, setState] = useState();
-    const [zipCode, setZipCode] = useState();
-    const [errors, setErrors] = useState({fullName: '', address1: '', address2: '', city: ''});
+    const [zipcode, setZipCode] = useState();
+    const [errors, setErrors] = useState({fullName: '', address1: '', address2: '', city: '', state: ''});
 
     const onSubmit = (event) => {
         event.preventDefault();
         let isInputsValid = true;
-        let fullNameError = "", address1Error = "", address2Error = "", cityError = "";
+        let fullNameError = "", address1Error = "", address2Error = "", cityError = "", stateError = "";
         if(fullName.length > 50 ) {
             fullNameError = "Must be less than 50 characters.";
             isInputsValid = false;
@@ -35,12 +35,17 @@ const ClientProfileForm = (props) => {
             cityError = "Must be less than 100 characters.";
             isInputsValid = false;
         }
+        if(state == undefined) {
+            stateError = "Please select a state."
+            isInputsValid = false;
+        }
         if(!isInputsValid) {
             setErrors({
                 fullName: fullNameError,
                 address1: address1Error,
                 address2: address2Error,
                 city: cityError,
+                state: stateError
             });
         }
         else {
@@ -50,11 +55,11 @@ const ClientProfileForm = (props) => {
                 address2,
                 city,
                 state,
-                zipCode
+                zipcode
             };
             localStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
             // redirect to Fuel Quote Page
-            props.history.push('/fuelquote');
+            props.history.push('/fuelquote'); //Home
         }
     };
 
@@ -118,12 +123,15 @@ const ClientProfileForm = (props) => {
                                 <small> { errors.city } </small>
                             </p>
                             <label className="text-left mb-0">State</label>
-                            <StatesSelect value={state} className="w-100 mb-3" onChange={onStateSelect} />
+                            <StatesSelect value={state} className="w-100 mb-3" onChange={onStateSelect} required />
+                            <p className="text-danger">
+                                <small> { errors.state } </small>
+                            </p>
                             <label className="text-left mb-0">Zip code</label>
                             <input className="w-100 mb-0"
                             type="text"
                             name="zipcode"
-                            value={zipCode}
+                            value={zipcode}
                             pattern="[0-9]{5}|[0-9]{9}"
                             onChange={(e) => setZipCode(e.currentTarget.value)}
                             required
