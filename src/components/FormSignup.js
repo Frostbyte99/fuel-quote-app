@@ -20,15 +20,18 @@ const FormSignup = (props) => {
             props.history.push('/');
         }
     }
+    
+
  const loginStyle = {
     color: "blue",
   };
 
+// I will continue this.
   return (
-    <div className="form-content-right">
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="text-center flex-direction p-4 w-25 flex-column container bg-light border rounded">
+      <form className="form border-0 d-flex align-items flex-column mx-auto w-100" onSubmit={handleSubmit}>
         <h1>Signup form</h1>
-        <div className="form-inputs">
+        <div className="form-group">
           <label htmlFor="username" className="form-label">
             Username
           </label>
@@ -42,7 +45,7 @@ const FormSignup = (props) => {
             onChange={(e) => setUserName(e.currentTarget.value)}
           />
         </div>
-        <div className="form-inputs">
+        <div className="form-group">
           <label htmlFor="email" className="form-label">
             Email
           </label>
