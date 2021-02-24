@@ -10,61 +10,27 @@ const ClientProfileForm = (props) => {
     const [address1, setAddress1] = useState();
     const [address2, setAddress2] = useState();
     const [city, setCity]= useState();
-    const [state, setState] = useState();
+    const [usState, setUsState] = useState();
     const [zipcode, setZipCode] = useState();
-    const [errors, setErrors] = useState({fullName: '', address1: '', address2: '', city: '', state: ''});
-
+    
     const onSubmit = (event) => {
         event.preventDefault();
-        let isInputsValid = true;
-        let fullNameError = "", address1Error = "", address2Error = "", cityError = "", stateError = "";
-        if(fullName.length > 50 ) {
-            fullNameError = "Must be less than 50 characters.";
-            isInputsValid = false;
-        }
-        if(address1.length > 100) {
-            address1Error = "Must be less than 100 characters.";
-            isInputsValid = false;
-        }
-        // address2 may not exist(optional)
-        if(address2 && address2.length > 100) {
-            address2Error = "Must be less than 100 characters.";
-            isInputsValid = false;
-        }
-        if(city.length > 100) {
-            cityError = "Must be less than 100 characters.";
-            isInputsValid = false;
-        }
-        if(state === undefined) {
-            stateError = "Please select a state."
-            isInputsValid = false;
-        }
-        if(!isInputsValid) {
-            setErrors({
-                fullName: fullNameError,
-                address1: address1Error,
-                address2: address2Error,
-                city: cityError,
-                state: stateError
-            });
-        }
-        else {
-            const clientInformationObject = {
-                fullName,
-                address1,
-                address2,
-                city,
-                state,
-                zipcode
-            };
-            localStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
-            // redirect to Fuel Quote Page
-            props.history.push('/fuelquote'); //Home
-        }
+        const clientInformationObject = {
+            fullName,
+            address1,
+            address2,
+            city,
+            usState,
+            zipcode
+        };
+        localStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
+        // redirect to Fuel Quote Page
+        props.history.push('/fuelquote'); //Home
     };
 
    const onStateSelect = (event, state) => {
-        setState(state.abbreviation);
+        event.preventDefault();
+        setUsState(state.name);
    }
 
     return (
@@ -78,15 +44,13 @@ const ClientProfileForm = (props) => {
                             <div className="form-group">
                                 <label className="text-left mb-0">Full Name</label>
                                 <input className="w-100 mb-0"
+                                maxLength="50"
                                 type="text"
                                 name="fullName"
                                 value={fullName}
                                 onChange={(e) => setFullName(e.currentTarget.value)}
                                 required
                                 />
-                                <p className="text-danger">
-                                    <small> { errors.fullName } </small>
-                                </p>
                             </div>
                         </div>
                         <div className="col">
@@ -94,52 +58,48 @@ const ClientProfileForm = (props) => {
                             <div className="form-group">
                                 <label className="text-left mb-0">Address 1</label>
                                 <input className="w-100 mb-0"
+                                maxLength="100"
                                 type="text"
                                 name="address1"
                                 value={address1}
                                 onChange={(e) => setAddress1(e.currentTarget.value)}
                                 required
                                 />
-                                <p className="text-danger">
-                                    <small> { errors.address1 } </small>
-                                </p>
                             </div>
                             <div className="form-group">
                                 <label className="text-left mb-0">Address 2</label>
                                 <input className="w-100 mb-0"
+                                maxLength="100"
                                 type="text"
                                 name="address2"
                                 placeholder="(Optional)"
                                 value={address2}
                                 onChange={(e) => setAddress2(e.currentTarget.value)}
                                 />
-                                <p className="text-danger">
-                                    <small> { errors.address2 } </small>
-                                </p>
                             </div>
                             <div className="form-group">
                                 <label className="text-left mb-0">City</label>
                                 <input className="w-100 mb-0"
+                                maxLength="100"
                                 type="text"
                                 name="city"
                                 value={city}
                                 onChange={(e) => setCity(e.currentTarget.value)}
                                 required
                                 />
-                                <p className="text-danger">
-                                    <small> { errors.city } </small>
-                                </p>
                             </div>
                             <div className="form-group">
                                 <label className="text-left mb-0">State</label>
-                                <StatesSelect value={state} className="w-100 mb-3" onChange={onStateSelect} required />
-                                <p className="text-danger">
-                                    <small> { errors.state } </small>
-                                </p>
+                                <StatesSelect className="w-100 mb-3"
+                                    value={usState}
+                                    onChange={onStateSelect}
+                                    required
+                                />
                             </div>
                             <div className="form-group">
                                 <label className="text-left mb-0">Zip code</label>
                                 <input className="w-100 mb-0"
+                                maxLength="9"
                                 type="text"
                                 name="zipcode"
                                 value={zipcode}
