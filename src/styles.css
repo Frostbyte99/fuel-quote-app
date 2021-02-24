@@ -1,0 +1,38 @@
+.testClass {
+    background-color: black;
+}
+
+.form-label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0px;
+}
+
+.form-input-btn {
+    background-color: rgb(93, 120, 241);
+}
+
+.form-input {
+    width: 100%;
+    margin-bottom: 0px;
+}
+.readonly {
+    color: #555;
+}
+table, th, td {
+    align-items: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 2px 10px;
+}
+.tableDiv {
+    overflow-x: auto;
+    margin: 3px 2px;
+}
+table {
+    width: 100%;
+    min-width: 820px;
+}
+th {
+    background-color: #DDD;
+}

@@ -10,7 +10,7 @@ const NavBar = () => {
     const styleLink = {
         borderRadius: '5px',
         padding: '5px',
-        fontWeigh: 'bold',
+        fontWeight: 'bold',
     };
 
     return (

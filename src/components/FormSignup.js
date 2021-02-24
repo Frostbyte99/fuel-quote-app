@@ -33,7 +33,7 @@ const FormSignup = (props) => {
     // Redirect to login page to complete account setup
     props.history.push("/");
   };
-
+  
   return (
     <div
       style={divStyle}
