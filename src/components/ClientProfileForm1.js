@@ -35,7 +35,7 @@ const ClientProfileForm = (props) => {
             cityError = "Must be less than 100 characters.";
             isInputsValid = false;
         }
-        if(state === undefined) {
+        if(state == undefined) {
             stateError = "Please select a state."
             isInputsValid = false;
         }
@@ -68,7 +68,7 @@ const ClientProfileForm = (props) => {
    }
 
     return (
-        <div>
+        <div className="testClass">
             <NavBar/>
             <div className="text-center flex-direction mt-3 p-3 w-50 flex-column container bg-light border rounded">
                 <form onSubmit={onSubmit} className="border-0 d-flex align-items-center flex-column mx-auto w-100">
@@ -92,7 +92,7 @@ const ClientProfileForm = (props) => {
                         <div className="col">
                             <p className="mb-0 text-center"><strong>Contact Information</strong></p>
                             <div className="form-group">
-                                <label className="text-left mb-0">Address 1</label>
+                                </div><label className="text-left mb-0">Address 1</label>
                                 <input className="w-100 mb-0"
                                 type="text"
                                 name="address1"
