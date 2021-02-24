@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import "./FormSignup.css";
 
 const FormSignup = (props) => {
   const divStyle = {
