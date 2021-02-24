@@ -1,20 +1,26 @@
-import React from "react";
-import useForm from "./useForm";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
-/**
- * Form where the user can signup for the website
- *
- * Values in form:
- * username
- * email
- * password
- * password2 <termporary, just used to confirm password>
- */
 
-const FormSignup = () => {
-  const { handleChange, values, handleSubmit } = useForm();
-  const loginStyle = {
+const FormSignup = (props) => {
+    const [userName, setUserName] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+    const [passwordError, setPasswordError] = useState();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if(password !== confirmPassword) {
+            setPasswordError("Passwords must match");
+        }
+        else {
+            //redirect to login page
+            props.history.push('/');
+        }
+    }
+ const loginStyle = {
     color: "blue",
   };
 
@@ -32,8 +38,8 @@ const FormSignup = () => {
             className="form-input"
             name="username"
             placeholder="Enter your username"
-            value={values.username}
-            onChange={handleChange}
+            value={userName}
+            onChange={(e) => setUserName(e.currentTarget.value)}
           />
         </div>
         <div className="form-inputs">
@@ -46,8 +52,8 @@ const FormSignup = () => {
             className="form-input"
             name="email"
             placeholder="Enter your email"
-            value={values.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.currentTarget.value)}
           />
         </div>
         <div className="form-inputs">
@@ -60,8 +66,8 @@ const FormSignup = () => {
             className="form-input"
             name="password"
             placeholder="Enter your password"
-            value={values.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.currentTarget.value)}
           />
         </div>
         <div className="form-inputs">
@@ -74,9 +80,14 @@ const FormSignup = () => {
             className="form-input"
             name="password2"
             placeholder="Re-Enter your password"
-            value={values.password2}
-            onChange={handleChange}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.currentTarget.value)}
           />
+          <p className="text-danger text-left">
+            <small>
+                { passwordError }
+            </small>
+        </p>
         </div>
         <button className="form-input-btn" type="submit">
           Sign up
@@ -90,6 +101,10 @@ const FormSignup = () => {
       </form>
     </div>
   );
+};
+
+FormSignup.propTypes = {
+    history: PropTypes.string.isRequired,
 };
 
 export default FormSignup;
