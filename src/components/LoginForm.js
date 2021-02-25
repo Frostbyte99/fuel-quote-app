@@ -11,15 +11,8 @@ const LoginForm = (props) => {
         props.history.push('/fuelquote');
     };
 
-    const divStyle = {
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-      };
-
       return (
-        <div style={divStyle} className="text-center flex-direction mt-0 p-4 w-25 flex-column container bg-light border rounded">
+        <div className="center-component text-center flex-direction mt-0 p-4 w-25 flex-column container bg-light border rounded">
           <h4> Welcome! </h4>
           <form onSubmit={onSubmit} className="border-0 d-flex align-items flex-column mx-auto w-100">
             <label className="text-left mb-0">Email</label>
@@ -40,7 +33,7 @@ const LoginForm = (props) => {
               onChange={(e) => setPassword(e.currentTarget.value)}
               required
             />
-            <input className="bg-primary border-primary text-white mt-2" type="submit" value="Log In" />
+            <input className="login-signup-btn" type="submit" value="Log In" />
           </form>
           <small>Don&apos;t have an account? Sign up
             <Link to="/signup"> here</Link>
