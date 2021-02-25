@@ -1,32 +1,24 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import "../styles.css";
 
-
 const FormSignup = (props) => {
-    const [userName, setUserName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
-    const [passwordError, setPasswordError] = useState();
-    const handleSubmit = (event) => {
-        event.preventDefault();
+/*
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+  });
 
-        if(password !== confirmPassword) {
-            setPasswordError("Passwords must match");
-        }
-        else {
-            //redirect to login page
-            props.history.push('/');
-        }
-    }
-    
-
- const loginStyle = {
-    color: "blue",
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
   };
-
+  */
+  
   return (
     <div className="center-component text-center flex-direction p-4 w-25 flex-column container bg-light border rounded">
       <form className="form border-0 d-flex align-items flex-column mx-auto w-100" onSubmit={handleSubmit}>
@@ -101,13 +93,71 @@ const FormSignup = (props) => {
             here
           </Link>
         </span>
-      </form>
+        </form>
+        <small>
+          Already have an account? Log in
+          <Link to="/"> here</Link>
+        </small>
     </div>
   );
 };
 
-FormSignup.propTypes = {
-    history: PropTypes.string.isRequired,
-};
-
 export default FormSignup;
+  /*
+  const handleSubmit = (e) => {
+    console.log("Form submitted!");
+    console.log(values);
+    e.preventDefault();
+
+    // TODO: save account information
+
+    // Redirect to login page to complete account setup
+    props.history.push("/");
+  };
+  
+  return (
+    <div
+      style={divStyle}
+      className="text-center flex-direction mt-0 p-4 w-25 flex-column container bg-light border rounded"
+    >
+      <h3>Please fill out the information below to make an account</h3>
+      <form
+        className="border-0 d-flex align-items flex-column mx-auto w-100"
+        onSubmit={handleSubmit}
+      >
+        <label htmlFor="username" className="text-left mb-0">
+          Username
+        </label>
+        <input
+          className="w-100 mb-0"
+          id="username"
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={values.username}
+          onChange={handleChange}
+          required
+          pattern="[A-Za-z0-9]+"
+          title="Only letters and numbers"
+        />
+        <label htmlFor="password" className="text-left mb-0">
+          Password
+        </label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={values.password}
+          onChange={handleChange}
+          required
+          pattern="[A-Za-z0-9]+"
+          title="Only letters and numbers"
+        />
+        <input
+          className="bg-primary border-primary text-white mt-2"
+          type="submit"
+          value="Signup"
+        />
+        */
+      
