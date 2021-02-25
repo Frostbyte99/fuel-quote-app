@@ -2,6 +2,12 @@
 
 Simple webapp for purchasing fuel based on a clients locations and history.
 
+### Few things that I think would cool to do
+
+* Same indentation for all the files: some indentitations are equivalent to 2 spaces
+    others to 4 spaces. We should choose one and stick with it.
+
+
 ## How to download and run
 
 * cd into an empty directory
