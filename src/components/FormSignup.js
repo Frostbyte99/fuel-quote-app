@@ -1,24 +1,32 @@
-import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import "../styles.css";
 
-const FormSignup = (props) => {
-/*
-  const [values, setValues] = useState({
-    username: "",
-    password: "",
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
+const FormSignup = (props) => {
+    const [userName, setUserName] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+    const [passwordError, setPasswordError] = useState();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if(password !== confirmPassword) {
+            setPasswordError("Passwords must match");
+        }
+        else {
+            //redirect to login page
+            props.history.push('/');
+        }
+    }
+    
+
+ const loginStyle = {
+    color: "blue",
   };
-  */
-  
+
   return (
     <div className="center-component text-center flex-direction p-4 w-25 flex-column container bg-light border rounded">
       <form className="form border-0 d-flex align-items flex-column mx-auto w-100" onSubmit={handleSubmit}>
@@ -93,17 +101,32 @@ const FormSignup = (props) => {
             here
           </Link>
         </span>
-        </form>
-        <small>
-          Already have an account? Log in
-          <Link to="/"> here</Link>
-        </small>
+      </form>
     </div>
   );
 };
 
+FormSignup.propTypes = {
+    history: PropTypes.string.isRequired,
+};
+
 export default FormSignup;
+
   /*
+  // This code looks like a login, not a signup.
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = (e) => {
     console.log("Form submitted!");
     console.log(values);
