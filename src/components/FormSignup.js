@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import "../styles.css";
 
 
 const FormSignup = (props) => {
@@ -26,9 +27,8 @@ const FormSignup = (props) => {
     color: "blue",
   };
 
-// I will continue this.
   return (
-    <div className="text-center flex-direction p-4 w-25 flex-column container bg-light border rounded">
+    <div className="center-component text-center flex-direction p-4 w-25 flex-column container bg-light border rounded">
       <form className="form border-0 d-flex align-items flex-column mx-auto w-100" onSubmit={handleSubmit}>
         <h1>Signup form</h1>
         <div className="form-group">
@@ -92,7 +92,7 @@ const FormSignup = (props) => {
             </small>
         </p>
         </div>
-        <button className="form-input-btn" type="submit">
+        <button className="login-signup-btn" type="submit">
           Sign up
         </button>
         <span className="form-input-login">
