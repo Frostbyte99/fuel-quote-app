@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "../styles.css";
 
-
 const FormSignup = (props) => {
-    const [userName, setUserName] = useState();
-    const [password, setPassword] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
-    const [passwordError, setPasswordError] = useState();
-    const handleSubmit = (event) => {
-        event.preventDefault();
+  const [userName, setUserName] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [passwordError, setPasswordError] = useState();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-        if(password !== confirmPassword) {
-            setPasswordError("Passwords must match");
-        }
-        else {
-            //redirect to login page
-            props.history.push('/');
-        }
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords must match");
+    } else {
+      //redirect to login page
+      props.history.push("/");
     }
-    
+  };
 
- const loginStyle = {
+  const loginStyle = {
     color: "blue",
   };
 
   return (
     <div className="center-component text-center flex-direction p-4 w-25 flex-column container bg-light border rounded">
-      <form className="form border-0 d-flex align-items flex-column mx-auto w-100" onSubmit={handleSubmit}>
+      <form
+        className="form border-0 d-flex align-items flex-column mx-auto w-100"
+        onSubmit={handleSubmit}
+      >
         <h1>Signup form</h1>
         <div className="form-group">
           <label htmlFor="username" className="form-label">
@@ -72,10 +72,8 @@ const FormSignup = (props) => {
             onChange={(e) => setConfirmPassword(e.currentTarget.value)}
           />
           <p className="text-danger text-left">
-            <small>
-                { passwordError }
-            </small>
-        </p>
+            <small>{passwordError}</small>
+          </p>
         </div>
         <button className="login-signup-btn" type="submit">
           Sign up
@@ -92,8 +90,7 @@ const FormSignup = (props) => {
 };
 
 FormSignup.propTypes = {
-    history: PropTypes.string.isRequired,
+  history: PropTypes.string.isRequired,
 };
 
 export default FormSignup;
-      
