@@ -2,11 +2,9 @@
 
 Simple webapp for purchasing fuel based on a clients locations and history.
 
-### Few things that I think would cool to do
+### Formatting
 
-* Same indentation for all the files: some indentitations are equivalent to 2 spaces
-    others to 4 spaces. We should choose one and stick with it.
-
+* Use two space formatting for tabs.
 
 ## How to download and run
 
@@ -26,33 +24,29 @@ Simple webapp for purchasing fuel based on a clients locations and history.
 
 ### Forms
 
-- [ ] Create Login Form
-- [ ] Create Signup Form
-- [ ] Create Client Profile Form
-- [ ] Fuel Quote Form
+- [x] Create Login Form
+- [x] Create Signup Form
+- [x] Create Client Profile Form
+- [x] Fuel Quote Form
 
 ### Profile Form
 
 Profile page needs these fields:
 
-- [ ] Full Name (50 characters, required)
-- [ ] Address 1 (100 characters, required)
-- [ ] Address 2 (100 characters, optional)
-- [ ] City (100 characters, required)
-- [ ] State (Drop Down, selection required) DB will store 2 character state code
-- [ ] Zipcode (9 characters, at least 5 character code required)
+- [ x ] Full Name (50 characters, required)
+- [ x ] Address 1 (100 characters, required)
+- [ x ] Address 2 (100 characters, optional)
+- [ x ] City (100 characters, required)
+- [ x ] State (Drop Down, selection required) DB will store 2 character state code
+- [ x ] Zipcode (9 characters, at least 5 character code required)
 
 ### Fuel quote Form
 
-- [ ] Gallons Requested (numeric, required)
-- [ ] Delivery Address (Non-editable, comes from client profile)
-- [ ] Delivery Date (Calender, date picker)
-- [ ] Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet)
-- [ ] Total Amount Due (numeric non-editable, calculated (gallons * price)) 
-- [ ] Display quote history in tabular display
+- [x] Gallons Requested (numeric, required)
+- [x] Delivery Address (Non-editable, comes from client profile)
+- [x] Delivery Date (Calender, date picker)
+- [x] Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet)
+- [x] Total Amount Due (numeric non-editable, calculated (gallons * price)) 
+- [x] Display quote history in tabular display
 
-- [ ] Have validations in place for all inputs
-
-## Basic UML Design
-
-## Use Case Diagram
+- [x] Have validations in place for all inputs
