@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const LoginForm = (props) => {
-    const [email, setEmail] = useState();
+    const [user, setUser] = useState();
     const [password, setPassword] = useState('');
 
     const onSubmit = (event) => {
@@ -15,13 +15,13 @@ const LoginForm = (props) => {
         <div className="center-component text-center flex-direction mt-0 p-4 w-25 flex-column container bg-light border rounded">
           <h4> Welcome! </h4>
           <form onSubmit={onSubmit} className="border-0 d-flex align-items flex-column mx-auto w-100">
-            <label className="text-left mb-0">Email</label>
+            <label className="text-left mb-0">Username</label>
             <input className="w-100 mb-0"
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.currentTarget.value)}
+              type="text"
+              name="user"
+              placeholder="Username"
+              value={user}
+              onChange={(e) => setUser(e.currentTarget.value)}
               required
             />
             <label className="text-left mb-0">Password</label>
