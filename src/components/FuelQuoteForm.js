@@ -8,7 +8,7 @@ const FuelQuoteForm = () => {
     const [gallons, setGallons] = useState();
     const [totalPrice, setTotalPrice] = useState();
     const clientInfo = JSON.parse(localStorage.getItem('clientInformation'));
-    const address = (clientInfo.address1 + " " + clientInfo.address2).trim();
+    const address = clientInfo!=null ? (clientInfo.address1 + " " + clientInfo.address2).trim() : "";
     const pricePerGallon = 2.199; //would be calculated according to state/city/address
 
     const onSubmit = (event) => {
@@ -60,6 +60,7 @@ const FuelQuoteForm = () => {
                     <input type="date" name="delivery-date" id="delivery-date" value={deliveryDate}
                         onChange={(e) => setDeliveryDate(e.currentTarget.value)} required />
                 </div>
+                {/*"Please enter your address in your Profile"*/}
                 <div className="form-group">
                     <label htmlFor="gallons">Gallons:</label>
                     <input type="number" name="gallons" id="gallons" value={gallons} min="0" max="1000000"
