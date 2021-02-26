@@ -63,3 +63,8 @@ table {
 th {
     background-color: #DDD;
 }
+#lastLine {
+    background-color: #EEE;
+    font-weight: bold;
+    padding-left: 50px;
+}

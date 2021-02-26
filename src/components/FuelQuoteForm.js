@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
+import { Link } from 'react-router-dom';
+import FuelQuoteHistory from "./FuelQuoteHistory";
 import "../styles.css";
 
 const FuelQuoteForm = () => {
@@ -8,7 +10,7 @@ const FuelQuoteForm = () => {
     const [gallons, setGallons] = useState();
     const [totalPrice, setTotalPrice] = useState();
     const clientInfo = JSON.parse(localStorage.getItem('clientInformation'));
-    const address = (clientInfo.address1 + " " + clientInfo.address2).trim();
+    const address = clientInfo!=null ? (clientInfo.address1 + " " + clientInfo.address2).trim() : "";
     const pricePerGallon = 2.199; //would be calculated according to state/city/address
 
     const onSubmit = (event) => {
@@ -25,6 +27,7 @@ const FuelQuoteForm = () => {
         //console.log(JSON.stringify(fuelQuote));
         //? redirect to Fuel Quote History Page
         //props.history.push('/fuelquote/history');
+        //FuelQuoteHistory.appendRow(); //Not sure why this won't work
     }
 
     const clearFuelQuote = () => {
@@ -60,6 +63,7 @@ const FuelQuoteForm = () => {
                     <input type="date" name="delivery-date" id="delivery-date" value={deliveryDate}
                         onChange={(e) => setDeliveryDate(e.currentTarget.value)} required />
                 </div>
+                {/*"Please enter your address in your Profile"*/}
                 <div className="form-group">
                     <label htmlFor="gallons">Gallons:</label>
                     <input type="number" name="gallons" id="gallons" value={gallons} min="0" max="1000000"
@@ -77,9 +81,11 @@ const FuelQuoteForm = () => {
                         value={`$${totalPrice || "0.00"}`} readonly required />
                 </div>
                 {/*gallons, price-per-gallon should have 3 decimal places: #.###*/}
-                {/*Would like to make readonly inputs lightgray*/}
                 <input type="submit" value="Enter"/>
             </form>
+            <div className="bottom">
+                <Link to="/fuelquotehistory"><button>See Fuel Quote History</button></Link>
+            </div>
         </div>
     )
 }
