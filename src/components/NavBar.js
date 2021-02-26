@@ -13,6 +13,10 @@ const NavBar = () => {
         fontWeight: 'bold',
     };
 
+    const clearLocalStorage = () => {
+        localStorage.clear()
+    }
+
     return (
         <nav style={styleNavBar} className="navbar navbar-expand-lg navbar-light justify-content-between p-4">
             <div>
@@ -21,7 +25,7 @@ const NavBar = () => {
             </div>
             <div>
                 <small style={styleLink} className="navbar-brand border border-white rounded p-1">Welcome!</small>
-                <a href="/" style={styleLink} className="navbar-brand bg-light rounded p-1 ml-4 mr-5 text-dark">Sign Out</a>
+                <a href="/" style={styleLink} className="navbar-brand bg-light rounded p-1 ml-4 mr-5 text-dark" onClick={clearLocalStorage}>Sign Out</a>
             </div>
         </nav>
     );
