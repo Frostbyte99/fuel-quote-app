@@ -35,8 +35,8 @@ const LoginForm = (props) => {
             />
             <input className="login-signup-btn" type="submit" value="Log In" />
           </form>
-          <small>Don&apos;t have an account? Sign up
-            <Link to="/signup"> here</Link>
+          <small>Don&apos;t have an account? Sign&nbsp;up&nbsp;
+            <Link to="/signup">here</Link>
           </small>
         </div>
       );
