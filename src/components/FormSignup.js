@@ -6,7 +6,6 @@ import "../styles.css";
 
 const FormSignup = (props) => {
     const [userName, setUserName] = useState();
-    const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [passwordError, setPasswordError] = useState();
@@ -43,20 +42,6 @@ const FormSignup = (props) => {
             placeholder="Enter your username"
             value={userName}
             onChange={(e) => setUserName(e.currentTarget.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            className="form-input"
-            name="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.currentTarget.value)}
           />
         </div>
         <div className="form-inputs">
