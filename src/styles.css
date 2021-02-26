@@ -1,6 +1,3 @@
-.testClass {
-    background-color: black;
-}
 /*
     I could not fix the spacing(margins top and bottom) between input boxes
     in the signup page. If you can help...
@@ -46,6 +43,15 @@
 .readonly {
     color: #555;
 }
+
+.bottom {
+    /*background-color: #3167b1;*/
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+    /*border-radius: 4px;*/
+}
+
 table, th, td {
     align-items: center;
     border: 1px solid black;
