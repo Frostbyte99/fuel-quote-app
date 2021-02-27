@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
 import "../styles.css";
@@ -44,12 +44,12 @@ class FuelQuoteHistory extends React.Component {
 const Row = ({ id }) => {
     const fuelQuote = JSON.parse(localStorage.getItem('fuelQuoteInformation')); //for now
     const clientInfo = fuelQuote!=null ? fuelQuote.clientInfo : null;
-    if(id == 0 && (fuelQuote==null || clientInfo==null)){
+    if(id === 0 && (fuelQuote===null || clientInfo===null)){
         return (
             <tr> <td colSpan="9" id="blankLine" height="20px"></td> </tr>
         );
     }
-    if(id == -1 || fuelQuote==null || clientInfo==null) {
+    if(id === -1 || fuelQuote==null || clientInfo==null) {
         return (
             <tr> <td colSpan="9" id="lastLine">End of Fuel Quote History</td> </tr>
         );
@@ -71,12 +71,5 @@ const Row = ({ id }) => {
         </tr>
     )
 }
-
-/*const fillTable = () => {
-    if(data.rows!=[]) {
-        return this.data.rows.map(id => ( <Row id = {id} /> ))
-    }
-    return (<tr></tr>); //?return empty row
-}*/
 
 export default FuelQuoteHistory;
