@@ -37,7 +37,7 @@ const FuelQuoteForm = () => {
     }
 
     const handleGallonChange = (g) => {
-        if (g != "" && parseFloat(g)!=parseFloat(g).toFixed(3)) {
+        if (g !== "" && parseFloat(g)!==parseFloat(g).toFixed(3)) {
             return;
         }
         if(Number.isInteger(g*1000))
@@ -52,7 +52,7 @@ const FuelQuoteForm = () => {
         <div>
             <NavBar />
             <div className="text-center flex-direction mt-3 p-3 w-50 flex-column container bg-light border rounded">
-                <form className="border-0 d-flex align-items-center flex-column mx-auto w-100"
+                <form className="border-0 d-flex align-items-center flex-column mx-auto"
                     onSubmit={onSubmit}>
                     <h2>Enter Your Fuel Quote</h2>
                     <div className="form-group">
@@ -84,7 +84,7 @@ const FuelQuoteForm = () => {
                             value={`$${totalPrice || "0.00"}`} readonly required />
                     </div>
                     {/*gallons, price-per-gallon should have 3 decimal places: #.###*/}
-                    <input type="submit" value="Enter" className="bg-primary w-50 border-primary text-white mt-4"/>
+                    <input type="submit" value="Enter" className="login-signup-btn w-50"/>
                 </form>
             </div>
             <div className="bottom">
