@@ -51,38 +51,42 @@ const FuelQuoteForm = () => {
     return (
         <div>
             <NavBar />
-            <form onSubmit={onSubmit}>
-                <h2>Enter Your Fuel Quote</h2>
-                <div className="form-group-readonly">
-                    <label htmlFor="toAddr">Delivery Address:</label>
-                    <input type="text" name="toAddr" id="toAddr" className="readonly"
-                        value={address} readonly required />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="delivery-date">Delivery Date:</label>
-                    <input type="date" name="delivery-date" id="delivery-date" value={deliveryDate}
-                        onChange={(e) => setDeliveryDate(e.currentTarget.value)} required />
-                </div>
-                {/*"Please enter your address in your Profile"*/}
-                <div className="form-group">
-                    <label htmlFor="gallons">Gallons:</label>
-                    <input type="number" name="gallons" id="gallons" value={gallons} min="0" max="1000000"
-                        onChange={(e) => handleGallonChange(e.currentTarget.value)} step="any" required />
-                </div>
-                <div className="form-group-readonly">
-                    <label htmlFor="price-per-gallon">Price/Gallon:</label>
-                    <input type="text" name="price-per-gallon" id="price-per-gallon" className="readonly"
-                        value={`$${Math.floor(pricePerGallon*100)/100} ${(pricePerGallon*1000)%10}/10`}
-                        readonly required />
-                </div>
-                <div className="form-group-readonly">
-                    <label htmlFor="total-price">Total Price:</label>
-                    <input type="text" name="total-price" id="total-price" className="readonly"
-                        value={`$${totalPrice || "0.00"}`} readonly required />
-                </div>
-                {/*gallons, price-per-gallon should have 3 decimal places: #.###*/}
-                <input type="submit" value="Enter"/>
-            </form>
+            <div className="center-component text-center flex-direction mt-3 p-3 w-50 flex-column container bg-light border rounded">
+                <form className="border-0 d-flex align-items-center flex-column mx-auto w-100"
+                    onSubmit={onSubmit}>
+                    <h2>Enter Your Fuel Quote</h2>
+                    <div className="form-group">
+                        <label className="form-label">Delivery Address:</label>
+                        <input type="text" name="toAddr" id="toAddr" className="form-input readonly"
+                            value={address} placeholder="Enter Address in Profile" readonly required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="delivery-date" className="form-label">Delivery Date:</label>
+                        <input type="date" name="delivery-date" id="delivery-date" className="form-input"
+                            value={deliveryDate}
+                            onChange={(e) => setDeliveryDate(e.currentTarget.value)} required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="gallons" className="form-label">Gallons:</label>
+                        <input type="number" name="gallons" id="gallons" className="form-input"
+                            value={gallons} min="0" max="1000000"
+                            onChange={(e) => handleGallonChange(e.currentTarget.value)} step="any" required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="price-per-gallon" className="form-label">Price/Gallon:</label>
+                        <input type="text" name="price-per-gallon" id="price-per-gallon" className="form-input readonly"
+                            value={`$${Math.floor(pricePerGallon*100)/100} ${(pricePerGallon*1000)%10}/10`}
+                            readonly required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="total-price" className="form-label">Total Price:</label>
+                        <input type="text" name="total-price" id="total-price" className="form-input readonly"
+                            value={`$${totalPrice || "0.00"}`} readonly required />
+                    </div>
+                    {/*gallons, price-per-gallon should have 3 decimal places: #.###*/}
+                    <input type="submit" value="Enter" className="bg-primary w-50 border-primary text-white mt-4"/>
+                </form>
+            </div>
             <div className="bottom">
                 <Link to="/fuelquotehistory"><button>See Fuel Quote History</button></Link>
             </div>
