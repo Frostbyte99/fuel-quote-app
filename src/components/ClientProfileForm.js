@@ -82,9 +82,9 @@ const ClientProfileForm = (props) => {
                                 required
                                 />
                             </div>
-                            <div className="form-group-profile">
-                                <label className="text-left mb-0">State</label>
-                                <select id="state" name="state" value={usState}
+                            <div className="form-group-profile mt-2">
+                                <label className="text-left mb-0  ">State</label>
+                                <select id="state" name="state" value={usState} className="w-100"
                                     onChange={(e) => setUsState(e.currentTarget.value)} required>
                                     <option value="" selected></option>
                                     <option value="AL">Alabama</option>
