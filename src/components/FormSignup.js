@@ -42,6 +42,7 @@ const FormSignup = (props) => {
             placeholder="Enter your username"
             value={userName}
             onChange={(e) => setUserName(e.currentTarget.value)}
+            required
           />
         </div>
         <div className="form-inputs">
@@ -56,6 +57,7 @@ const FormSignup = (props) => {
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.currentTarget.value)}
+            required
           />
         </div>
         <div className="form-inputs">
