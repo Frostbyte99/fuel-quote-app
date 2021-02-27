@@ -40,7 +40,6 @@ const FormSignup = (props) => {
             className="form-input"
             name="username"
             placeholder="Enter your username"
-            required
             value={userName}
             onChange={(e) => setUserName(e.currentTarget.value)}
             required
@@ -56,7 +55,6 @@ const FormSignup = (props) => {
             className="form-input"
             name="password"
             placeholder="Enter your password"
-            required
             value={password}
             onChange={(e) => setPassword(e.currentTarget.value)}
             required
@@ -71,10 +69,10 @@ const FormSignup = (props) => {
             type="password"
             className="form-input"
             name="password2"
-            requred
             placeholder="Re-Enter your password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.currentTarget.value)}
+            required
           />
           <p className="text-danger text-left">
             <small>{passwordError}</small>
