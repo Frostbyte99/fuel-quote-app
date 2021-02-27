@@ -1,8 +1,3 @@
-/*
-    I could not fix the spacing(margins top and bottom) between input boxes
-    in the signup page. If you can help...
-*/
-
 .form-label {
     display: block;
     text-align: left;
@@ -46,11 +41,9 @@
 }
 
 .bottom {
-    /*background-color: #3167b1;*/
     position: absolute;
     right: 5px;
     bottom: 10px;
-    /*border-radius: 4px;*/
 }
 
 table, th, td {

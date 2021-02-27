@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
 import { Link } from 'react-router-dom';
-import FuelQuoteHistory from "./FuelQuoteHistory";
+// import FuelQuoteHistory from "./FuelQuoteHistory";
 import "../styles.css";
 
 const FuelQuoteForm = () => {
@@ -19,15 +19,10 @@ const FuelQuoteForm = () => {
             clientInfo,
             deliveryDate,
             gallons,
-            //pricePerGallon,
             totalPrice
         };
         localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuote));
         clearFuelQuote();
-        //console.log(JSON.stringify(fuelQuote));
-        //? redirect to Fuel Quote History Page
-        //props.history.push('/fuelquote/history');
-        //FuelQuoteHistory.appendRow(); //Not sure why this won't work
     }
 
     const clearFuelQuote = () => {
