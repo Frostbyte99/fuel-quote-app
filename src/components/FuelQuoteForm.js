@@ -51,7 +51,7 @@ const FuelQuoteForm = () => {
     return (
         <div>
             <NavBar />
-            <div className="center-component text-center flex-direction mt-3 p-3 w-50 flex-column container bg-light border rounded">
+            <div className="text-center flex-direction mt-3 p-3 w-50 flex-column container bg-light border rounded">
                 <form className="border-0 d-flex align-items-center flex-column mx-auto w-100"
                     onSubmit={onSubmit}>
                     <h2>Enter Your Fuel Quote</h2>
