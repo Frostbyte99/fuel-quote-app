@@ -35,7 +35,7 @@ const ClientProfileForm = (props) => {
                     <div className="row align-items-center text-left">
                         <div className="col">
                             <p className="mb-0 text-center"><strong>Personal Information</strong></p>
-                            <div className="form-group">
+                            <div className="form-groups">
                                 <label className="text-left mb-0">Full Name</label>
                                 <input className="w-100 mb-0"
                                 maxLength="50"
@@ -49,7 +49,7 @@ const ClientProfileForm = (props) => {
                         </div>
                         <div className="col">
                             <p className="mb-0 text-center"><strong>Contact Information</strong></p>
-                            <div className="form-group">
+                            <div className="form-group-profile">
                                 <label className="text-left mb-0">Address 1</label>
                                 <input className="w-100 mb-0"
                                 maxLength="100"
@@ -60,7 +60,7 @@ const ClientProfileForm = (props) => {
                                 required
                                 />
                             </div>
-                            <div className="form-group">
+                            <div className="form-group-profile">
                                 <label className="text-left mb-0">Address 2</label>
                                 <input className="w-100 mb-0"
                                 maxLength="100"
@@ -71,7 +71,7 @@ const ClientProfileForm = (props) => {
                                 onChange={(e) => setAddress2(e.currentTarget.value)}
                                 />
                             </div>
-                            <div className="form-group">
+                            <div className="form-group-profile">
                                 <label className="text-left mb-0">City</label>
                                 <input className="w-100 mb-0"
                                 maxLength="100"
@@ -82,7 +82,7 @@ const ClientProfileForm = (props) => {
                                 required
                                 />
                             </div>
-                            <div className="form-group">
+                            <div className="form-group-profile">
                                 <label className="text-left mb-0">State</label>
                                 <select id="state" name="state" value={usState}
                                     onChange={(e) => setUsState(e.currentTarget.value)} required>
@@ -139,7 +139,7 @@ const ClientProfileForm = (props) => {
                                     <option value="WY">Wyoming</option>
                                 </select>
                             </div>
-                            <div className="form-group">
+                            <div className="form-group-profile">
                                 <label className="text-left mb-0">Zip code</label>
                                 <input className="w-100 mb-0"
                                 maxLength="9"
@@ -153,7 +153,7 @@ const ClientProfileForm = (props) => {
                             </div>
                         </div>
                     </div>
-                    <input className="bg-primary w-50 border-primary text-white mt-4" type="submit" value="Submit" />
+                    <input className="login-signup-btn w-50" type="submit" value="Submit" />
                 </form>
             </div>
         </div>
