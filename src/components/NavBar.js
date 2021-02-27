@@ -20,7 +20,7 @@ const NavBar = () => {
     return (
         <nav style={styleNavBar} className="navbar navbar-expand-lg navbar-light justify-content-between p-4">
             <div>
-                <a href="/clientprofile" style={styleLink} className="navbar-brand ml-5 bg-light rounded p-1">Home</a>
+                <a href="/clientprofile" style={styleLink} className="navbar-brand ml-5 bg-light rounded p-1">Profile</a>
                 <a href="/fuelquote" style={styleLink} className="navbar-brand ml-4 bg-light rounded p-1">Fuel Form</a>
             </div>
             <div>
