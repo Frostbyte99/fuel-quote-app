@@ -33,12 +33,12 @@ Simple webapp for purchasing fuel based on a clients locations and history.
 
 Profile page needs these fields:
 
-- [ x ] Full Name (50 characters, required)
-- [ x ] Address 1 (100 characters, required)
-- [ x ] Address 2 (100 characters, optional)
-- [ x ] City (100 characters, required)
-- [ x ] State (Drop Down, selection required) DB will store 2 character state code
-- [ x ] Zipcode (9 characters, at least 5 character code required)
+- [x] Full Name (50 characters, required)
+- [x] Address 1 (100 characters, required)
+- [x] Address 2 (100 characters, optional)
+- [x] City (100 characters, required)
+- [x] State (Drop Down, selection required) DB will store 2 character state code
+- [x] Zipcode (9 characters, at least 5 character code required)
 
 ### Fuel quote Form
 
