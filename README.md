@@ -22,7 +22,7 @@ You should see **(env)** on the left of your console if it worked
 Installing dependencies
 
 ```python
-pip3 install django djangorestframework
+pip3 install -r requirements.txt
 ```
 
 ## With Django
