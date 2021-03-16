@@ -1,11 +1,21 @@
 from django.db import models
-# created temporary model for testing
 
-# Create your models here.
+class User(models.Model):
+  userName = models.CharField(max_length=100, unique=True)
+  #temporary
+  password = models.CharField(max_length=200)
 
-class Task(models.Model):
-  title = models.CharField(max_length=200)
-  completed = models.BooleanField(default=False, blank=True, null=True)
-      
-  def __str__(self):
-    return self.title
+class Profile(models.Model):
+  fullName = models.CharField(max_length=50)
+  address1 = models.CharField(max_length=100)
+  address2 = models.CharField(max_length=100)
+  city = models.CharField(max_length=100)
+  usState = models.CharField(max_length=2)
+  zipcode = models.CharField(max_length=9)
+
+class Quote(models.Model):
+  gallons = models.IntegerField()
+  deliveryAddress = models.ForeignKey(Profile, on_delete=models.CASCADE)
+  deliveryDate = models.CharField(max_length=100, blank=True, null=True)
+  suggestedPrice = models.IntegerField()
+  totalAmount = models.IntegerField()
