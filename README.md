@@ -12,7 +12,7 @@ In the home directory of the project.
 ```python
 pythom -m venv venv
 
-For windows: ./venv/bin/activate
+For windows: .\venv\Scripts\activate
 
 For Linux/Mac: source /venv/bin/activate
 ```
