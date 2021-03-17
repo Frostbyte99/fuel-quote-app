@@ -27,3 +27,14 @@ venv/
 __pycache__/
 migrations/
 
+backend/__pycache__/__init__.cpython-39.pyc
+backend/__pycache__/admin.cpython-39.pyc
+backend/__pycache__/apps.cpython-39.pyc
+backend/__pycache__/models.cpython-39.pyc
+backend/__pycache__/urls.cpython-39.pyc
+backend/__pycache__/views.cpython-39.pyc
+backend/migrations/__pycache__/__init__.cpython-39.pyc
+fuel_quote_app/__pycache__/__init__.cpython-39.pyc
+fuel_quote_app/__pycache__/settings.cpython-39.pyc
+fuel_quote_app/__pycache__/urls.cpython-39.pyc
+fuel_quote_app/__pycache__/wsgi.cpython-39.pyc
