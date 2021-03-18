@@ -85,7 +85,7 @@ def quoteDetail(request, pk):
 
 @api_view(['POST'])
 def quoteCreate(request):
-	serializer = Quote(data=request.data)
+	serializer = QuoteSerializer(data=request.data)
 
 	if serializer.is_valid():
 		serializer.save()
