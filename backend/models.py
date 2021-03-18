@@ -6,6 +6,7 @@ class User(models.Model):
   password = models.CharField(max_length=200)
 
 class Profile(models.Model):
+  
   fullName = models.CharField(max_length=50)
   address1 = models.CharField(max_length=100)
   address2 = models.CharField(max_length=100)
@@ -15,7 +16,6 @@ class Profile(models.Model):
 
 class Quote(models.Model):
   gallons = models.IntegerField()
-  deliveryAddress = models.ForeignKey(Profile, on_delete=models.CASCADE)
+  address = models.CharField(max_length=100)
   deliveryDate = models.CharField(max_length=100, blank=True, null=True)
-  suggestedPrice = models.IntegerField()
-  totalAmount = models.IntegerField()
+  totalPrice = models.IntegerField()
