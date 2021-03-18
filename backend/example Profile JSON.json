@@ -6,3 +6,10 @@
     "state": "TX",
     "zipcode": "545634"
 }
+
+{
+    "gallons": 23,
+    "deliveryDate": "2023-02-01",
+    "address": "232 somewhere Dr",
+    "totalPrice": 2222
+}
