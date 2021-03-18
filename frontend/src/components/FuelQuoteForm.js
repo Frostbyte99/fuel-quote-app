@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import { Link } from 'react-router-dom';
 // import FuelQuoteHistory from "./FuelQuoteHistory";
 import "../styles.css";
+import axios from 'axios';
 
 const FuelQuoteForm = () => {
     const [deliveryDate, setDeliveryDate] = useState();
@@ -16,11 +17,22 @@ const FuelQuoteForm = () => {
     const onSubmit = (event) => {
         event.preventDefault();
         const fuelQuote = {
-            clientInfo,
-            deliveryDate,
-            gallons,
-            totalPrice
+          gallons,
+          address,
+          deliveryDate,
+          totalPrice,
         };
+
+        JSON.stringify(fuelQuote);
+        console.log(fuelQuote);
+        axios
+          .post(
+            "http://127.0.0.1:8000/api/quote-create/", fuelQuote)
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+          });
+
         localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuote));
         clearFuelQuote();
     }
@@ -32,7 +44,9 @@ const FuelQuoteForm = () => {
     }
 
     const handleGallonChange = (g) => {
-        if (g !== "" && parseFloat(g) != parseFloat(g).toFixed(3)) {
+        if (g !== "" && parseFloat(g) !== parseFloat(g).toFixed(3)) {
+            setGallons(0);
+            setTotalPrice(0);
             return;
         }
         if(Number.isInteger(g*1000))
