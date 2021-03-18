@@ -9,4 +9,4 @@ class ProfileSerializer(serializers.ModelSerializer):
 class QuoteSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Quote
-		fields = ('gallons', 'deliveryAddress', 'deliveryDate', 'suggestedPrice', 'totalAmount')
+		fields = ('gallons', 'address', 'deliveryDate', 'totalPrice',)
