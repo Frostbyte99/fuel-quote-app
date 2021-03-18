@@ -16,6 +16,6 @@ class Profile(models.Model):
 
 class Quote(models.Model):
   gallons = models.IntegerField()
-  address = models.CharField(max_length=100)
+  address = models.CharField(max_length=100, blank=True, null=True)
   deliveryDate = models.CharField(max_length=100, blank=True, null=True)
   totalPrice = models.IntegerField()
