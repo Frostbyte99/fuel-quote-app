@@ -9,7 +9,7 @@ const LoginForm = (props) => {
     const onSubmit = (event) => {
         event.preventDefault();
         props.history.push('/fuelquote');
-    };
+    }
 
       return (
         <div className="center-component text-center flex-direction mt-0 p-4 w-25 flex-column container bg-light border rounded">

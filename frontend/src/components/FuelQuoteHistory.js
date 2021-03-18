@@ -4,9 +4,11 @@ import NavBar from "./NavBar";
 import "../styles.css";
 
 class FuelQuoteHistory extends React.Component {
+   
     state = {
         data: [0, -1]
     };
+    
     appendRow = () => {
         let { data } = this.state;
         data[data.length-1] = data.length+1;
