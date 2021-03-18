@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
 import "../styles.css";
+import axios from 'axios';
 
 const ClientProfileForm = (props) => {
     const [fullName, setFullName] = useState();
@@ -11,7 +12,22 @@ const ClientProfileForm = (props) => {
     const [city, setCity]= useState();
     const [usState, setUsState] = useState();
     const [zipcode, setZipCode] = useState();
-    
+
+    function fetchProfile() {
+        console.log('Fetching profile');
+        var res;
+        axios
+          .get("http://127.0.0.1:8000/api/profile-list/")
+          .then(function (response) {
+            this.setState({response})
+          });
+
+        console.log(this.state.persons);
+        //console.log(JSON.parse(res).address1);
+
+    }
+
+    //fetchProfile();
     const onSubmit = (event) => {
         event.preventDefault();
         const clientInformationObject = {
@@ -22,6 +38,15 @@ const ClientProfileForm = (props) => {
             usState,
             zipcode
         };
+
+        JSON.stringify(clientInformationObject);
+        // TODO: modify variables so uploads for the current user
+        axios.post("http://127.0.0.1:8000/api/profile-create/", clientInformationObject)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+        });
+        
         localStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
         // redirect to Fuel Quote Page
         props.history.push('/fuelquote'); //Home
