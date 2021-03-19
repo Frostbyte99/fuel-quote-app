@@ -23,7 +23,7 @@ def apiOverview(request):
 		'Quote Detail' : '/quote-detail/',
 		'Quote Create' : '/quote-create/',
 		'Quote Update' : '/quote-update/',
-		'Quoote Delete' : '/quoote-delete/'
+		'Quote Delete' : '/quote-delete/'
 	}
 
 	return Response(api_urls)

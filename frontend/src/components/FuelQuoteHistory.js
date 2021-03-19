@@ -10,8 +10,9 @@ class FuelQuoteHistory extends React.Component {
     };
     
     appendRow = () => {
+        if(data[0] === 0) { data.shift() }
         let { data } = this.state;
-        data[data.length-1] = data.length+1;
+        data[data.length-1] = data.length;
         data.push(-1);
         this.setState({data});
     };

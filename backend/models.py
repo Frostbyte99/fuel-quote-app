@@ -4,6 +4,7 @@ class User(models.Model):
   userName = models.CharField(max_length=100, unique=True)
   #temporary
   password = models.CharField(max_length=200)
+  # foreignKey to the Profile of this User
 
 class Profile(models.Model):
   
@@ -19,3 +20,4 @@ class Quote(models.Model):
   address = models.CharField(max_length=100, blank=True, null=True)
   deliveryDate = models.CharField(max_length=100, blank=True, null=True)
   totalPrice = models.IntegerField()
+  # foreignKey to Profile of Client who submitted this Quote
