@@ -3,7 +3,10 @@ from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import ProfileSerializer, QuoteSerializer, UserSerializer, LoginSerializerWithToken
+from .serializers import ProfileSerializer
+from .serializers import QuoteSerializer
+from .serializers import UserSerializer
+from .serializers import LoginSerializerWithToken
 from .models import Profile, Quote, User
 # Create your views here.
 
