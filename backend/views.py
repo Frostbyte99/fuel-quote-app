@@ -144,3 +144,10 @@ def isUserUnique(request, pk):
 		return Response('True')
 	else:
 		return Response('False')
+
+@api_view(['GET'])
+def getUserName(request, pk):
+	user = User.objects.get(userID=pk)
+	serializer = UserSerializer(user, many=False)
+
+	return Response(serializer.data['userName'])

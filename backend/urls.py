@@ -19,4 +19,5 @@ urlpatterns = [
 	path('user-create/', views.userCreate, name="user-create"),
 	path('user-getUserUUID/<str:pk>/', views.getUserUUID, name="user-getUserUUID"),
 	path('user-isUserUnique/<str:pk>/', views.isUserUnique, name="user-isUserUnique"),
+	path('user-getUserName/<str:pk>/', views.getUserName, name="user-getUserName")
 ]
