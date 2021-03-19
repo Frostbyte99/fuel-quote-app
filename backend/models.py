@@ -1,13 +1,14 @@
+import uuid
 from django.db import models
 
 class User(models.Model):
   userName = models.CharField(max_length=100, unique=True)
-  #temporary
+  userID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
   password = models.CharField(max_length=200)
   # foreignKey to the Profile of this User
 
 class Profile(models.Model):
-  
+  userID = models.UUIDField(blank=True, null=True)
   fullName = models.CharField(max_length=50)
   address1 = models.CharField(max_length=100)
   address2 = models.CharField(max_length=100)
@@ -16,8 +17,9 @@ class Profile(models.Model):
   zipcode = models.CharField(max_length=9)
 
 class Quote(models.Model):
-  gallons = models.IntegerField()
+  userID = models.UUIDField(blank=True, null=True)
+  gallons = models.IntegerField(default=0)
   address = models.CharField(max_length=100, blank=True, null=True)
   deliveryDate = models.CharField(max_length=100, blank=True, null=True)
-  totalPrice = models.IntegerField()
+  totalPrice = models.IntegerField(default=0)
   # foreignKey to Profile of Client who submitted this Quote

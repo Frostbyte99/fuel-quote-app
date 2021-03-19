@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "../styles.css";
+import axios from 'axios';
 
 const FormSignup = (props) => {
   const [userName, setUserName] = useState();
@@ -11,10 +12,25 @@ const FormSignup = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const signUpObject = {
+      userName,
+      password
+    };
+
     if (password !== confirmPassword) {
       setPasswordError("Passwords must match");
     } else {
       //redirect to login page
+
+      JSON.stringify(signUpObject);
+
+      axios
+        .post("http://127.0.0.1:8000/api/user-create/", signUpObject)
+        .then((response) => {
+          console.log(response);
+          console.log(response.data);
+        });
+
       props.history.push("/");
     }
   };
