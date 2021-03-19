@@ -6,6 +6,9 @@ import Login from './components/LoginForm';
 import ClientProfile from './components/ClientProfileForm';
 import FuelQuote from './components/FuelQuoteForm';
 import FuelQuoteHistory from './components/FuelQuoteHistory';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 
 const App = () => (
     <Switch>

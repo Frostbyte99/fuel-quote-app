@@ -7,7 +7,7 @@ class User(models.Model):
   password = models.CharField(max_length=200)
 
 class Profile(models.Model):
-  userID = models.UUIDField()
+  userID = models.UUIDField(blank=True, null=True)
   fullName = models.CharField(max_length=50)
   address1 = models.CharField(max_length=100)
   address2 = models.CharField(max_length=100)
@@ -16,7 +16,7 @@ class Profile(models.Model):
   zipcode = models.CharField(max_length=9)
 
 class Quote(models.Model):
-  userID = models.UUIDField()
+  userID = models.UUIDField(blank=True, null=True)
   gallons = models.IntegerField(default=0)
   address = models.CharField(max_length=100, blank=True, null=True)
   deliveryDate = models.CharField(max_length=100, blank=True, null=True)
