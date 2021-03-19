@@ -3,10 +3,8 @@ from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
-from .serializers import ProfileSerializer, QuoteSerializer, UserSerializer
+from .serializers import ProfileSerializer, QuoteSerializer, UserSerializer, LoginSerializerWithToken
 from .models import Profile, Quote, User
-
 # Create your views here.
 
 @api_view(['GET'])
@@ -21,6 +19,8 @@ def apiOverview(request):
 		'Quote Detail' : '/quote-detail/',
 		'Quote Create' : '/quote-create/',
 		'Quote Update' : '/quote-update/',
+		'Quoote Delete' : '/quoote-delete/',
+    'Login user' : '/login/',
 		'Quote Delete' : '/quote-delete/',
 		'User List' : '/user-list/',
 		'User Create' : '/user-create/',
@@ -109,6 +109,15 @@ def quoteDelete(request, pk):
 	quote.delete()
 
 	return Response('Quote item deleted')
+    
+@api_view(['POST'])
+def login(self, request, format=None):
+    serializer = LoginSerializerWithToken(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors)
 
 # User Model
 
