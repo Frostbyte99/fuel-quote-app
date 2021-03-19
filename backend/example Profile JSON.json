@@ -1,13 +1,25 @@
 {
-    "id": 1,
+    "userID": 123412341234,
     "fullName": "someone somewhere",
-    "address": "232 somewhere Dr",
+    "address1": "232 somewhere Dr",
+    "address2": "",
     "city": "Somewhere",
-    "state": "TX",
+    "usState": "TX",
     "zipcode": "545634"
 }
 
 {
+    "userID": 234567891234,
+    "fullName": "fdds ssdf",
+    "address1": "897 bruh Dr",
+    "address2": "291 suf Dr",
+    "city": "asddasd",
+    "usState": "TX",
+    "zipcode": "77889"
+}
+
+{
+    "userID": 123412341234,
     "gallons": 23,
     "deliveryDate": "2023-02-01",
     "address": "232 somewhere Dr",
