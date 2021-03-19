@@ -54,16 +54,6 @@ def profileCreate(request):
 	
 	return Response(serializer.data)
 
-
-@api_view(['POST'])
-def login(self, request, format=None):
-    serializer = LoginSerializerWithToken(data=request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data);
-    return Response(serializer.errors);
-
 @api_view(['POST'])
 def profileUpdate(request, pk):
 	profile = Profile.objects.get(id=pk)
@@ -121,3 +111,12 @@ def quoteDelete(request, pk):
 	quote.delete()
 
 	return Response('Quote item deleted')
+    
+@api_view(['POST'])
+def login(self, request, format=None):
+    serializer = LoginSerializerWithToken(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors)

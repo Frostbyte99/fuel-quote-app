@@ -14,7 +14,7 @@ class QuoteSerializer(serializers.ModelSerializer):
 
 class LoginSerializerWithToken(serializers.ModelSerializer):
 
-    token = serializers.SerializerMethodField();
+    token = serializers.SerializerMethodField()
     password = serializers.CharField(write_only=True)
 
     def get_token(self, obj):
@@ -35,4 +35,4 @@ class LoginSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('token', 'userName', "password");
+        fields = ('token', 'userName', "password")
