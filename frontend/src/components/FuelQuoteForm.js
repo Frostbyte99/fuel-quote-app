@@ -38,7 +38,7 @@ const FuelQuoteForm = () => {
         console.log(res.data);
       });
 
-    localStorage.setItem("fuelQuoteInformation", fuelQuote);
+    localStorage.setItem("fuelQuoteInformation", JSON.stringify(fuelQuote));
     clearFuelQuote();
   };
 
@@ -49,7 +49,7 @@ const FuelQuoteForm = () => {
   };
 
   const handleGallonChange = (g) => {
-    if (g !== "" && parseFloat(g) !== parseFloat(g).toFixed(3)) {
+    if (g == "" && parseFloat(g) !== parseFloat(g).toFixed(3)) {
       return;
     }
     if (Number.isInteger(g * 1000)) {
