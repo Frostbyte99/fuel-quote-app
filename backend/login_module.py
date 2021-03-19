@@ -10,7 +10,7 @@ def validateUserName(userName):
     return True
 
 def validatePassword(password):
-    if type(Fassword) != str:
+    if type(password) != str:
         return False
     if not password: #empty string
         return False
