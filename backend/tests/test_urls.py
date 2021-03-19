@@ -52,13 +52,13 @@ class TestUrls(SimpleTestCase):
         url = reverse('user-create')
         self.assertEquals(resolve(url).func, userCreate)
 
-    def test_user_update_url_resolves(self):
-        url = reverse('user-update', args=[1])
-        self.assertEquals(resolve(url).func, userUpdate)
+    def test_user_get_UUID_url_resolves(self):
+        url = reverse('user-getUserUUID', args=[1])
+        self.assertEquals(resolve(url).func, getUserUUID)
 
-    def test_user_delete_url_resolves(self):
-        url = reverse('user-delete', args=[1])
-        self.assertEquals(resolve(url).func, userDelete)
+    def test_user_is_unique_url_resolves(self):
+        url = reverse('user-isUserUnique', args=[1])
+        self.assertEquals(resolve(url).func, isUserUnique)
 
     # def test_[...]_url_resolves(self):
     #     url = reverse('...')
