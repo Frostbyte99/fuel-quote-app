@@ -4,11 +4,9 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .serializers import ProfileSerializer
-from .serializers import QuoteSerializer
+from .serializers import ProfileSerializer, QuoteSerializer, UserSerializer
+from .models import Profile, Quote, User
 
-from .models import Profile
-from .models import Quote
 # Create your views here.
 
 @api_view(['GET'])
@@ -23,7 +21,10 @@ def apiOverview(request):
 		'Quote Detail' : '/quote-detail/',
 		'Quote Create' : '/quote-create/',
 		'Quote Update' : '/quote-update/',
-		'Quoote Delete' : '/quoote-delete/'
+		'Quote Delete' : '/quote-delete/',
+		'User List' : '/user-list/',
+		'User Create' : '/user-create/',
+		'User UUID' : 'user-getUserUUID/<str:pk>/',
 	}
 
 	return Response(api_urls)
@@ -108,3 +109,28 @@ def quoteDelete(request, pk):
 	quote.delete()
 
 	return Response('Quote item deleted')
+
+# User Model
+
+@api_view(['GET'])
+def userList(request):
+	user = User.objects.all().order_by('-userID')
+	serializer = UserSerializer(user, many=True)
+
+	return Response(serializer.data)
+
+@api_view(['POST'])
+def userCreate(request):
+	serializer = UserSerializer(data=request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+	
+	return Response(serializer.data)
+
+@api_view(['GET'])
+def getUserUUID(request, pk):
+	user = User.objects.get(userName=pk)
+	serializer = UserSerializer(user, many=False)
+
+	return Response(serializer.data['userID'])
