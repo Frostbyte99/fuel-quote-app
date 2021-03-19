@@ -2,6 +2,7 @@ from django.test import SimpleTestCase  # When there's no interaction with the D
 from backend import fuel_quote_module
 from backend import client_profile_module
 from backend import pricing_module
+# from backend import login_module
 
 class TestModules(SimpleTestCase):
 
@@ -103,7 +104,7 @@ class TestModules(SimpleTestCase):
             assert test_answers[i] == test_result
 
         # _City_:
-        print("City:")
+        print("City Tests:")
         test_cities =   ["Houston", "Chicago", "Los Angeles", "New York City",
                         "", 0, "123", " ",
                         "aaaaaaaaabaaaaaaaaabaaaaaaaaabaaaaaaaaabaaaaaaaaabaaaaaaaaabaaaaaaaaabaaaaaaaaabaaaaaaaaabaaaaaaaaabc"]
@@ -116,7 +117,7 @@ class TestModules(SimpleTestCase):
             assert test_answers[i] == test_result
 
         # _State_:
-        print("State:")
+        print("State Tests:")
         test_states =   ["TX", "CA", "nY", "Ak",
                         "", 0, "123", " ",
                         "Tex"]
@@ -129,7 +130,7 @@ class TestModules(SimpleTestCase):
             assert test_answers[i] == test_result
         
         # _Zipcode_:
-        print("Zipcode:")
+        print("Zipcode Tests:")
         test_zcodes =   ["77123", "7728C", "77125-1800", "771251800",
                         "", 0, "7712", "771234",
                         77123, 771251800, 7712, 771234]
@@ -140,6 +141,25 @@ class TestModules(SimpleTestCase):
             test_result = client_profile_module.validateZipcode(zipc)
             self.printTestResult(i, test_result, test_answers[i])
             assert test_answers[i] == test_result
+
+    def test_login_module(self):
+        # _Username_:
+        print("Username Tests:")
+        test_usernames= []
+        test_answers =  []
+        # for i, usern in enumerate(test_usernames):
+        #     test_result = login_module.validateUserName(usern)
+        #     self.printTestResult(i, test_result, test_answers[i])
+        #     assert test_answers[i] == test_result
+
+        # _Password_:
+        print("Password Tests:")
+        test_pswds =    []
+        test_answers =  []
+        # for i, pswd in enumerate(test_pswds):
+        #     test_result = login_module.validatePassword(pswd)
+        #     self.printTestResult(i, test_result, test_answers[i])
+        #     assert test_answers[i] == test_result
 
     def test_pricing_module(self):
         # _(Specific Value Name)_:    print("(Value Name):")

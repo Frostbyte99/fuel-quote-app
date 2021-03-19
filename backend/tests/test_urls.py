@@ -60,6 +60,10 @@ class TestUrls(SimpleTestCase):
         url = reverse('user-isUserUnique', args=[1])
         self.assertEquals(resolve(url).func, isUserUnique)
 
+    def test_user_username_resolves(self):
+        url = reverse('user-getUserName', args=[1])
+        self.assertEquals(resolve(url).func, getUserName)
+
     # def test_[...]_url_resolves(self):
     #     url = reverse('...')
     #     self.assertEquals(resolve(url).func, ...)
