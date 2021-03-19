@@ -6,9 +6,11 @@ from rest_framework.response import Response
 
 from .serializers import ProfileSerializer
 from .serializers import QuoteSerializer
+from .serializers import LoginSerializerWithToken
 
 from .models import Profile
 from .models import Quote
+from .models import User
 # Create your views here.
 
 @api_view(['GET'])
@@ -23,7 +25,8 @@ def apiOverview(request):
 		'Quote Detail' : '/quote-detail/',
 		'Quote Create' : '/quote-create/',
 		'Quote Update' : '/quote-update/',
-		'Quoote Delete' : '/quoote-delete/'
+		'Quoote Delete' : '/quoote-delete/',
+        'Login user' : '/login/'
 	}
 
 	return Response(api_urls)
@@ -50,6 +53,16 @@ def profileCreate(request):
 		serializer.save()
 	
 	return Response(serializer.data)
+
+
+@api_view(['POST'])
+def login(self, request, format=None):
+    serializer = LoginSerializerWithToken(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data);
+    return Response(serializer.errors);
 
 @api_view(['POST'])
 def profileUpdate(request, pk):
