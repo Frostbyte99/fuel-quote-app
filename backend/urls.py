@@ -14,8 +14,8 @@ urlpatterns = [
 	path('quote-create/', views.quoteCreate, name="quote-create"),
 	path('quote-update/<str:pk>/', views.quoteUpdate, name="quote-update"),
 	path('quote-delete/<str:pk>/', views.quoteDelete, name="quote-delete"),
-  #Login
-  path('login/', views.login, name="login"),
+	#Login
+	path('login/', views.login, name="login"),
 	# User API
 	path('user-list/', views.userList, name="user-list"),
 	path('user-create/', views.userCreate, name="user-create"),
