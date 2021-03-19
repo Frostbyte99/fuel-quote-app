@@ -49,10 +49,7 @@ const FuelQuoteForm = () => {
   };
 
   const handleGallonChange = (g) => {
-    if (g !== "" && parseFloat(g) !== parseFloat(g).toFixed(3)) {
-      // Temporary
-      setGallons(0);
-      setTotalPrice(0);
+    if (g == "" && parseFloat(g) !== parseFloat(g).toFixed(3)) {
       return;
     }
     if (Number.isInteger(g * 1000)) {

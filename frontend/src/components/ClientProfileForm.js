@@ -38,7 +38,7 @@ const ClientProfileForm = (props) => {
             console.log(res.data);
         });
         
-        localStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
+        localStorage.setItem('clientInformation', clientInformationObject);
         // redirect to Fuel Quote Page
         props.history.push('/fuelquote'); //Home
     };
