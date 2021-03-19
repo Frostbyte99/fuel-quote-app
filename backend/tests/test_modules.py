@@ -2,7 +2,7 @@ from django.test import SimpleTestCase  # When there's no interaction with the D
 from backend import fuel_quote_module
 from backend import client_profile_module
 from backend import pricing_module
-# from backend import login_module
+from backend import login_module
 
 class TestModules(SimpleTestCase):
 
@@ -145,21 +145,29 @@ class TestModules(SimpleTestCase):
     def test_login_module(self):
         # _Username_:
         print("Username Tests:")
-        test_usernames= []
-        test_answers =  []
-        # for i, usern in enumerate(test_usernames):
-        #     test_result = login_module.validateUserName(usern)
-        #     self.printTestResult(i, test_result, test_answers[i])
-        #     assert test_answers[i] == test_result
+        test_usernames= ["User123", "User 123", "User_123", "",
+                        1234, "1234", "o_o", "bigMan",
+                        "xVx_User_xVx", "MoneyMan$"]
+        test_answers =  [True, False, True, False,
+                        False, True, False, True,
+                        True, False]
+        for i, usern in enumerate(test_usernames):
+            test_result = login_module.validateUserName(usern)
+            self.printTestResult(i, test_result, test_answers[i])
+            assert test_answers[i] == test_result
 
         # _Password_:
         print("Password Tests:")
-        test_pswds =    []
-        test_answers =  []
-        # for i, pswd in enumerate(test_pswds):
-        #     test_result = login_module.validatePassword(pswd)
-        #     self.printTestResult(i, test_result, test_answers[i])
-        #     assert test_answers[i] == test_result
+        test_pswds =    ["pass123", "123_123", "123 56", "",
+                        123456, "123456", "pswd5", "bigManPass",
+                        "xVx_pAsS_xVx", "C0MPleXX$P@$$w0rD"]
+        test_answers =  [True, True, False, False,
+                        False, True, False, True,
+                        True, True]
+        for i, pswd in enumerate(test_pswds):
+            test_result = login_module.validatePassword(pswd)
+            self.printTestResult(i, test_result, test_answers[i])
+            assert test_answers[i] == test_result
 
     def test_pricing_module(self):
         # _(Specific Value Name)_:    print("(Value Name):")
