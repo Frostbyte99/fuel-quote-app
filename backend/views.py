@@ -3,14 +3,8 @@ from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
-from .serializers import ProfileSerializer
-from .serializers import QuoteSerializer
-from .serializers import LoginSerializerWithToken
-
-from .models import Profile
-from .models import Quote
-from .models import User
+from .serializers import ProfileSerializer, QuoteSerializer, UserSerializer, LoginSerializerWithToken
+from .models import Profile, Quote, User
 # Create your views here.
 
 @api_view(['GET'])
@@ -26,7 +20,11 @@ def apiOverview(request):
 		'Quote Create' : '/quote-create/',
 		'Quote Update' : '/quote-update/',
 		'Quoote Delete' : '/quoote-delete/',
-        'Login user' : '/login/'
+    'Login user' : '/login/',
+		'Quote Delete' : '/quote-delete/',
+		'User List' : '/user-list/',
+		'User Create' : '/user-create/',
+		'User UUID' : 'user-getUserUUID/<str:pk>/',
 	}
 
 	return Response(api_urls)
@@ -120,3 +118,45 @@ def login(self, request, format=None):
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors)
+
+# User Model
+
+@api_view(['GET'])
+def userList(request):
+	user = User.objects.all().order_by('-userID')
+	serializer = UserSerializer(user, many=True)
+
+	return Response(serializer.data)
+
+@api_view(['POST'])
+def userCreate(request):
+	serializer = UserSerializer(data=request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+	
+	return Response(serializer.data)
+
+@api_view(['GET'])
+def getUserUUID(request, pk):
+	user = User.objects.get(userName=pk)
+	serializer = UserSerializer(user, many=False)
+
+	return Response(serializer.data['userID'])
+
+@api_view(['GET'])
+def isUserUnique(request, pk):
+	user = User.objects.get(userName=pk)
+	serializer = UserSerializer(user, many=False)
+
+	if pk == serializer.data['userID']:
+		return Response('True')
+	else:
+		return Response('False')
+
+@api_view(['GET'])
+def getUserName(request, pk):
+	user = User.objects.get(userID=pk)
+	serializer = UserSerializer(user, many=False)
+
+	return Response(serializer.data['userName'])

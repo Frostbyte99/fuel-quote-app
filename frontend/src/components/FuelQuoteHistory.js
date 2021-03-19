@@ -10,8 +10,9 @@ class FuelQuoteHistory extends React.Component {
     };
     
     appendRow = () => {
+        if(data[0] === 0) { data.shift() }
         let { data } = this.state;
-        data[data.length-1] = data.length+1;
+        data[data.length-1] = data.length;
         data.push(-1);
         this.setState({data});
     };
@@ -45,6 +46,7 @@ class FuelQuoteHistory extends React.Component {
 
 const Row = ({ id }) => {
     const fuelQuote = JSON.parse(localStorage.getItem('fuelQuoteInformation')); //for now
+
     const clientInfo = fuelQuote!=null ? fuelQuote.clientInfo : null;
     if(id === 0 && (fuelQuote===null || clientInfo===null)){
         return (
@@ -57,7 +59,6 @@ const Row = ({ id }) => {
         );
         //Note: if clientInfo null, that fuel quote is invalid and should be flagged
     }
-    
 
     return (
         <tr id={`row-${id}`}>
