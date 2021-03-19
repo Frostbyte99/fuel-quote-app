@@ -8,8 +8,6 @@ import FuelQuote from './components/FuelQuoteForm';
 import FuelQuoteHistory from './components/FuelQuoteHistory';
 import axios from 'axios';
 
-axios.defaults.withCredentials = true;
-
 const App = () => (
     <Switch>
         <Route path="/" exact component={Login} />
