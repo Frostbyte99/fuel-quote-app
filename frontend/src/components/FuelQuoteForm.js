@@ -7,7 +7,7 @@ import "../styles.css";
 import axios from "axios";
 
 const FuelQuoteForm = () => {
-  const [userID, setUserID] = useState("b0c04889-ea96-418a-9179-fd4629947e41");
+  const [userID, setUserID] = useState("1b871769-8ebd-4be0-9a84-fcf199287a42");
   const [deliveryDate, setDeliveryDate] = useState();
   const [gallons, setGallons] = useState();
   const [totalPrice, setTotalPrice] = useState();
@@ -50,6 +50,7 @@ const FuelQuoteForm = () => {
 
   const handleGallonChange = (g) => {
     if (g !== "" && parseFloat(g) !== parseFloat(g).toFixed(3)) {
+      // Temporary
       setGallons(0);
       setTotalPrice(0);
       return;
