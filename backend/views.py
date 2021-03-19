@@ -134,3 +134,13 @@ def getUserUUID(request, pk):
 	serializer = UserSerializer(user, many=False)
 
 	return Response(serializer.data['userID'])
+
+@api_view(['GET'])
+def isUserUnique(request, pk):
+	user = User.objects.get(userName=pk)
+	serializer = UserSerializer(user, many=False)
+
+	if pk == serializer.data['userID']:
+		return Response('True')
+	else:
+		return Response('False')

@@ -6,6 +6,7 @@ import "../styles.css";
 import axios from 'axios';
 
 const ClientProfileForm = (props) => {
+    const [userID, setUserID] = useState(123412341234);
     const [fullName, setFullName] = useState();
     const [address1, setAddress1] = useState();
     const [address2, setAddress2] = useState();
@@ -15,7 +16,6 @@ const ClientProfileForm = (props) => {
 
     function fetchProfile() {
         console.log('Fetching profile');
-        var res;
         axios
           .get("http://127.0.0.1:8000/api/profile-list/")
           .then(function (response) {
@@ -30,7 +30,9 @@ const ClientProfileForm = (props) => {
     //fetchProfile();
     const onSubmit = (event) => {
         event.preventDefault();
+        setUserID(123412341234);
         const clientInformationObject = {
+            userID,
             fullName,
             address1,
             address2,

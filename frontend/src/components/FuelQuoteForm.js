@@ -7,6 +7,7 @@ import "../styles.css";
 import axios from 'axios';
 
 const FuelQuoteForm = () => {
+    const [userID, setUserID] = useState(123412341234);
     const [deliveryDate, setDeliveryDate] = useState();
     const [gallons, setGallons] = useState();
     const [totalPrice, setTotalPrice] = useState();
@@ -14,9 +15,13 @@ const FuelQuoteForm = () => {
     const address = clientInfo!=null ? (clientInfo.address1 + " " + clientInfo.address2).trim() : "";
     const pricePerGallon = 2.199; //would be calculated according to state/city/address
 
+    
+
     const onSubmit = (event) => {
         event.preventDefault();
+        
         const fuelQuote = {
+          userID,
           gallons,
           address,
           deliveryDate,

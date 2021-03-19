@@ -18,4 +18,5 @@ urlpatterns = [
 	path('user-list/', views.userList, name="user-list"),
 	path('user-create/', views.userCreate, name="user-create"),
 	path('user-getUserUUID/<str:pk>/', views.getUserUUID, name="user-getUserUUID"),
+	path('user-isUserUnique/<str:pk>/', views.isUserUnique, name="user-isUserUnique"),
 ]
