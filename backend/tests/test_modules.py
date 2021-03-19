@@ -1,6 +1,7 @@
 from django.test import SimpleTestCase  # When there's no interaction with the Database
 from backend import fuel_quote_module
 from backend import client_profile_module
+from backend import pricing_module
 
 class TestModules(SimpleTestCase):
 
@@ -139,6 +140,15 @@ class TestModules(SimpleTestCase):
             test_result = client_profile_module.validateZipcode(zipc)
             self.printTestResult(i, test_result, test_answers[i])
             assert test_answers[i] == test_result
+
+    def test_pricing_module(self):
+        # _(Specific Value Name)_:    print("(Value Name):")
+        test_prices =   []
+        test_answers =  []
+        # for i, p in enumerate(test_prices):
+        #     test_result = pricing_module.validatePrice(pc)
+        #     self.printTestResult(i, test_result, test_answers[i])
+        #     assert test_answers[i] == test_result
 
     # def test_[...]_module(self):
     #     # _(Specific Value Name)_:    print("(Value Name):")
