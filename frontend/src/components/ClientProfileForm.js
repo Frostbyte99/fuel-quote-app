@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const ClientProfileForm = (props) => {
     const [userID, setUserID] = useState(
-      "b0c04889-ea96-418a-9179-fd4629947e41"
+      "f30e8d27-e64e-437a-a629-c38ec9ebb4f4"
     );
     const [fullName, setFullName] = useState();
     const [address1, setAddress1] = useState();
@@ -19,7 +19,7 @@ const ClientProfileForm = (props) => {
     //fetchProfile();
     const onSubmit = (event) => {
         event.preventDefault();
-        setUserID("1b871769-8ebd-4be0-9a84-fcf199287a42");
+        setUserID("f30e8d27-e64e-437a-a629-c38ec9ebb4f4");
         const clientInformationObject = {
             userID,
             fullName,
@@ -30,15 +30,14 @@ const ClientProfileForm = (props) => {
             zipcode
         };
 
-        JSON.stringify(clientInformationObject);
         // TODO: modify variables so uploads for the current user
-        axios.post("http://127.0.0.1:8000/api/profile-create/", clientInformationObject)
+        axios.post("http://127.0.0.1:8000/api/profile-create/", JSON.stringify(clientInformationObject))
         .then(res => {
             console.log(res);
             console.log(res.data);
         });
         
-        localStorage.setItem('clientInformation', clientInformationObject);
+        localStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
         // redirect to Fuel Quote Page
         props.history.push('/fuelquote'); //Home
     };

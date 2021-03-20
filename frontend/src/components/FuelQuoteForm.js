@@ -7,11 +7,13 @@ import "../styles.css";
 import axios from "axios";
 
 const FuelQuoteForm = () => {
-  const [userID, setUserID] = useState("1b871769-8ebd-4be0-9a84-fcf199287a42");
+  const [userID, setUserID] = useState("f30e8d27-e64e-437a-a629-c38ec9ebb4f4");
   const [deliveryDate, setDeliveryDate] = useState();
   const [gallons, setGallons] = useState();
   const [totalPrice, setTotalPrice] = useState();
-  const clientInfo = JSON.parse(localStorage.getItem("clientInformation"));
+  const clientInfo = JSON.parse(JSON.stringify(localStorage.getItem("clientInformation")));
+  console.log("getting client")
+  console.log(clientInfo);
   const address =
     clientInfo != null
       ? (clientInfo.address1 + " " + clientInfo.address2).trim()
@@ -29,10 +31,9 @@ const FuelQuoteForm = () => {
       totalPrice,
     };
 
-    JSON.stringify(fuelQuote);
     console.log(fuelQuote);
     axios
-      .post("http://127.0.0.1:8000/api/quote-create/", fuelQuote)
+      .post("http://127.0.0.1:8000/api/quote-create/", JSON.stringify(fuelQuote))
       .then((res) => {
         console.log(res);
         console.log(res.data);
