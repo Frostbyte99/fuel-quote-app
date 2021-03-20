@@ -7,6 +7,9 @@ class User(models.Model):
   password = models.CharField(max_length=200)
   # foreignKey to the Profile of this User
 
+# from django.contrib.auth.models import User
+# class UserProfile(models.Model):
+#     user = models.OneToOneField(User)
 class Profile(models.Model):
   userID = models.UUIDField(blank=True, null=True)
   fullName = models.CharField(max_length=50, default="Example Name")
