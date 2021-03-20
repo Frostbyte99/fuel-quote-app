@@ -113,7 +113,7 @@ def quoteDelete(request, pk):
 	return Response('Quote item deleted')
     
 @api_view(['POST'])
-def login(self, request, format=None):
+def login(request, format=None):
     serializer = LoginSerializerWithToken(data=request.data)
 
     if serializer.is_valid():

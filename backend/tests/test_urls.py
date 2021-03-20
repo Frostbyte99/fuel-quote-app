@@ -44,6 +44,10 @@ class TestUrls(SimpleTestCase):
         url = reverse('quote-delete', args=[1])
         self.assertEquals(resolve(url).func, quoteDelete)
 
+    def test_login_url_resolves(self):
+        url = reverse('login')
+        self.assertEquals(resolve(url).func, login)
+
     def test_user_list_url_resolves(self):
         url = reverse('user-list')
         self.assertEquals(resolve(url).func, userList)

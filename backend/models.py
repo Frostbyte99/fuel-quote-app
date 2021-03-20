@@ -5,6 +5,7 @@ class User(models.Model):
   userName = models.CharField(max_length=100, unique=True)
   userID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
   password = models.CharField(max_length=200)
+  is_active = models.BooleanField(default=True)
   # foreignKey to the Profile of this User
 
 # from django.contrib.auth.models import User
