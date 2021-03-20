@@ -21,20 +21,20 @@ const ClientProfileForm = (props) => {
         event.preventDefault();
         setUserID("f30e8d27-e64e-437a-a629-c38ec9ebb4f4");
         const clientInformationObject = {
-            userID,
-            fullName,
-            address1,
-            address2,
-            city,
-            usState,
-            zipcode
+            userID: userID,
+            fullName: fullName,
+            address1: address1,
+            address2: address2,
+            city: city,
+            usState: usState,
+            zipcode: zipcode
         };
 
         // TODO: modify variables so uploads for the current user
         axios.post("http://127.0.0.1:8000/api/profile-create/", JSON.stringify(clientInformationObject))
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            // console.log(res);
+            // console.log(res.data);
         });
         
         localStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));

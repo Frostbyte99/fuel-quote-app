@@ -46,9 +46,7 @@ class FuelQuoteHistory extends React.Component {
 
 const Row = ({ id }) => {
     const fuelQuote = JSON.parse(localStorage.getItem('fuelQuoteInformation')); //for now
-    console.log(fuelQuote);
     const clientInfo = fuelQuote!=null ? fuelQuote.clientInfo : null;
-    console.log(clientInfo);
     if(id === 0 && (fuelQuote===null || clientInfo===null)){
         return (
             <tr> <td colSpan="9" id="blankLine" height="20px"></td> </tr>

@@ -11,9 +11,7 @@ const FuelQuoteForm = () => {
   const [deliveryDate, setDeliveryDate] = useState();
   const [gallons, setGallons] = useState();
   const [totalPrice, setTotalPrice] = useState();
-  const clientInfo = JSON.parse(JSON.stringify(localStorage.getItem("clientInformation")));
-  console.log("getting client")
-  console.log(clientInfo);
+  const clientInfo = JSON.parse(localStorage.getItem('clientInformation'));
   const address =
     clientInfo != null
       ? (clientInfo.address1 + " " + clientInfo.address2).trim()
@@ -24,22 +22,22 @@ const FuelQuoteForm = () => {
     event.preventDefault();
 
     const fuelQuote = {
-      userID,
-      gallons,
-      address,
-      deliveryDate,
-      totalPrice,
+      userID: userID,
+      clientInfo: clientInfo,
+      gallons: gallons,
+      address: address,
+      deliveryDate: deliveryDate,
+      totalPrice: totalPrice,
     };
 
-    console.log(fuelQuote);
     axios
       .post("http://127.0.0.1:8000/api/quote-create/", JSON.stringify(fuelQuote))
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
+        // console.log(res);
+        // console.log(res.data);
       });
 
-    localStorage.setItem("fuelQuoteInformation", JSON.stringify(fuelQuote));
+    localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuote));
     clearFuelQuote();
   };
 

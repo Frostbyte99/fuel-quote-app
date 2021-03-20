@@ -27,8 +27,8 @@ const FormSignup = (props) => {
       axios
         .post("http://127.0.0.1:8000/api/user-create/", signUpObject)
         .then((response) => {
-          console.log(response);
-          console.log(response.data);
+          // console.log(response);
+          // console.log(response.data);
         });
 
       props.history.push("/");
