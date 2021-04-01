@@ -7,7 +7,7 @@ from .serializers import ProfileSerializer
 from .serializers import QuoteSerializer
 from .serializers import UserSerializer
 from .serializers import LoginSerializerWithToken
-from .models import Profile, Quote, User
+from .models import ClientInformation, FuelQuote, UserCredentials
 # Create your views here.
 
 @api_view(['GET'])
@@ -35,13 +35,13 @@ def apiOverview(request):
 
 @api_view(['GET'])
 def profileList(request):
-	profile = Profile.objects.all().order_by('-id')
+	profile = ClientInformation.objects.all().order_by('-id')
 	serializer = ProfileSerializer(profile, many=True)
 	return Response(serializer.data)
 
 @api_view(['GET'])
 def profileDetail(request, pk):
-	profile = Profile.objects.get(id=pk)
+	profile = ClientInformation.objects.get(userID=pk)
 	serializer = ProfileSerializer(profile, many=False)
 	return Response(serializer.data)
 
@@ -56,7 +56,7 @@ def profileCreate(request):
 
 @api_view(['POST'])
 def profileUpdate(request, pk):
-	profile = Profile.objects.get(id=pk)
+	profile = ClientInformation.objects.get(id=pk)
 	serializer = ProfileSerializer(instance=profile, data=request.data)
 
 	if serializer.is_valid():
@@ -66,7 +66,7 @@ def profileUpdate(request, pk):
 
 @api_view(['DELETE'])
 def profileDelete(request, pk):
-	profile = Profile.objects.get(id=pk)
+	profile = ClientInformation.objects.get(id=pk)
 	profile.delete()
 
 	return Response('Profile item deleted')
@@ -75,14 +75,14 @@ def profileDelete(request, pk):
 
 @api_view(['GET'])
 def quoteList(request):
-	quote = Quote.objects.all().order_by('-id')
+	quote = FuelQuote.objects.all().order_by('-id')
 	serializer = QuoteSerializer(quote, many=True)
 	return Response(serializer.data)
 
 @api_view(['GET'])
 def quoteDetail(request, pk):
-	quote = Quote.objects.get(id=pk)
-	serializer = QuoteSerializer(quote, many=False)
+	quote = FuelQuote.objects.filter(userID=pk)
+	serializer = QuoteSerializer(quote, many=True)
 
 	return Response(serializer.data)
 
@@ -97,7 +97,7 @@ def quoteCreate(request):
 
 @api_view(['POST'])
 def quoteUpdate(request, pk):
-	quote = Quote.objects.get(id=pk)
+	quote = FuelQuote.objects.get(id=pk)
 	serializer = QuoteSerializer(instance=quote, data=request.data)
 
 	if serializer.is_valid():
@@ -107,7 +107,7 @@ def quoteUpdate(request, pk):
 
 @api_view(['DELETE'])
 def quoteDelete(request, pk):
-	quote = Quote.objects.get(id=pk)
+	quote = FuelQuote.objects.get(id=pk)
 	quote.delete()
 
 	return Response('Quote item deleted')
@@ -125,7 +125,7 @@ def login(request, format=None):
 
 @api_view(['GET'])
 def userList(request):
-	user = User.objects.all().order_by('-userID')
+	user = UserCredentials.objects.all().order_by('-userID')
 	serializer = UserSerializer(user, many=True)
 
 	return Response(serializer.data)
@@ -141,14 +141,14 @@ def userCreate(request):
 
 @api_view(['GET'])
 def getUserUUID(request, pk):
-	user = User.objects.get(userName=pk)
+	user = UserCredentials.objects.get(userName=pk)
 	serializer = UserSerializer(user, many=False)
 
 	return Response(serializer.data['userID'])
 
 @api_view(['GET'])
 def isUserUnique(request, pk):
-	user = User.objects.get(userName=pk)
+	user = UserCredentials.objects.get(userName=pk)
 	serializer = UserSerializer(user, many=False)
 
 	if pk == serializer.data['userID']:
@@ -158,7 +158,7 @@ def isUserUnique(request, pk):
 
 @api_view(['GET'])
 def getUserName(request, pk):
-	user = User.objects.get(userID=pk)
+	user = UserCredentials.objects.get(userID=pk)
 	serializer = UserSerializer(user, many=False)
 
 	return Response(serializer.data['userName'])
