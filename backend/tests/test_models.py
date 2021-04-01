@@ -4,12 +4,12 @@ from backend.models import *
 class TestModels(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create(
+        self.user = UserCredentials.objects.create(
             userName = 'User123',
             userID = 123,
             password = 'Pass123'
         )
-        self.profile = Profile.objects.create(
+        self.profile = ClientInformation.objects.create(
             userID = self.user.userID,
             fullName = 'Mr. Name',
             address1 = '123 Main Street',
@@ -18,7 +18,7 @@ class TestModels(TestCase):
             usState = 'TX',
             zipcode = '77123',
         )
-        self.quote = Quote.objects.create(
+        self.quote = FuelQuote.objects.create(
             userID = self.user.userID,
             gallons = '10',
             address = (self.profile.address1+" "+self.profile.address2).strip(),

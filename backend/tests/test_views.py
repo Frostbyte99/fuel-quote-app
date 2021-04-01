@@ -47,7 +47,7 @@ class TestViews(TestCase):
     #     self.assertEquals(response.status_code, 200)
 
     def test_profile_create_POST(self):
-        User.objects.create(
+        UserCredentials.objects.create(
             userName='User123',
             userID=self.userID,
             password='Pass123'
