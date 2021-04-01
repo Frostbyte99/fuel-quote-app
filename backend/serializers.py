@@ -1,20 +1,20 @@
 from rest_framework import serializers
-from .models import Profile, Quote, User
+from .models import ClientInformation, FuelQuote, UserCredentials
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = UserCredentials
         fields = '__all__'
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profile
-        fields = ('userID', 'fullName', 'address1', 'address2', 'city', 'usState', 'zipcode')
+        model = ClientInformation
+        fields = '__all__'
 
 class QuoteSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Quote
-		fields = ('userID', 'gallons', 'address', 'deliveryDate', 'totalPrice')
+		model = FuelQuote
+		fields = '__all__'
 
 class LoginSerializerWithToken(serializers.ModelSerializer):
 	token = serializers.SerializerMethodField()
@@ -34,5 +34,5 @@ class LoginSerializerWithToken(serializers.ModelSerializer):
 		instance.save()
 		return instance
 	class Meta:
-		model = User
+		model = UserCredentials
 		fields = ('token', 'userName', "password")
