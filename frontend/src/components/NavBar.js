@@ -13,8 +13,8 @@ const NavBar = () => {
         fontWeight: 'bold',
     };
 
-    const clearLocalStorage = () => {
-        localStorage.clear()
+    const clearSessionStorage = () => {
+        sessionStorage.clear()
     }
 
     return (
@@ -25,7 +25,7 @@ const NavBar = () => {
             </div>
             <div>
                 <small style={styleLink} className="navbar-brand border border-white rounded p-1">Welcome!</small>
-                <a href="/" style={styleLink} className="navbar-brand bg-light rounded p-1 ml-4 mr-5 text-dark" onClick={clearLocalStorage}>Sign Out</a>
+                <a href="/" style={styleLink} className="navbar-brand bg-light rounded p-1 ml-4 mr-5 text-dark" onClick={clearSessionStorage}>Sign Out</a>
             </div>
         </nav>
     );
