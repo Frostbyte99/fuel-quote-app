@@ -11,16 +11,25 @@ const FuelQuoteForm = () => {
   const [deliveryDate, setDeliveryDate] = useState();
   const [gallons, setGallons] = useState();
   const [totalPrice, setTotalPrice] = useState();
-  const clientInfo = JSON.parse(localStorage.getItem('clientInformation'));
+  const [fuelQuoteError, setFuelQuoteError] = useState();
+  const clientInfo = JSON.parse(sessionStorage.getItem('clientInformation'));
   const address =
     clientInfo != null
       ? (clientInfo.address1 + " " + clientInfo.address2).trim()
       : "";
   const pricePerGallon = 2.199; //would be calculated according to state/city/address
+    //Should come from DB
 
   const onSubmit = (event) => {
     event.preventDefault();
-
+    if(totalPrice <= 0) {
+      setFuelQuoteError("Total Price - Must be greater than 0");
+      return;
+    }
+    else {
+      setFuelQuoteError("");
+    }
+    
     const fuelQuote = {
       userID: userID,
       clientInfo: clientInfo,
@@ -36,7 +45,12 @@ const FuelQuoteForm = () => {
         // console.log(res);
         // console.log(res.data);
       });
-
+    
+    const storedFuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation'));
+    // (for loop) extract all fuel quotes in JSON, add `{[ , , , newFuelQuote]}` accordingly to store new element
+    // or just add new element to the JSON array somehow
+    // let fuelQuotes = ...;
+    // localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuotes));
     localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuote));
     clearFuelQuote();
   };
@@ -48,10 +62,11 @@ const FuelQuoteForm = () => {
   };
 
   const handleGallonChange = (g) => {
-    if (g == "" && parseFloat(g) !== parseFloat(g).toFixed(3)) {
-      return;
+    if(g === "") {
+      setGallons(undefined);
+      setTotalPrice(0);
     }
-    if (Number.isInteger(g * 1000)) {
+    else if (Number.isInteger(g * 1000)) {
       //Trim leading & trailing 0's. Format: g = [i or i.###] (where i = floor[g], # = [0-9 or ""])
       setGallons(g.replace(/^0*([0-9]+)(.[0-9]{1,3})?0*/, "$1$2"));
       setTotalPrice(parseFloat(g * pricePerGallon).toFixed(2)); //totalPrice = i.## (# = [0-9])
@@ -141,7 +156,9 @@ const FuelQuoteForm = () => {
               required
             />
           </div>
-          {/*gallons, price-per-gallon should have 3 decimal places: #.###*/}
+          <p className="text-danger text-left">
+            <small>{fuelQuoteError}</small>
+          </p>
           <input
             type="submit"
             value="Enter"
