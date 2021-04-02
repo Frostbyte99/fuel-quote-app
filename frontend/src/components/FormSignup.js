@@ -45,7 +45,6 @@ const FormSignup = (props) => {
     const signupInfo = {
       userName: userName,
       password: password,
-      passwordConfirm: confirmPassword
     };
 
 		// reset error before every submit
@@ -55,7 +54,7 @@ const FormSignup = (props) => {
 		if (password !== confirmPassword) {
 			setPasswordError("Passwords must match");
 		} else {
-			Axios.post('http://127.0.0.1:8000/api/signup/', JSON.stringify(signupInfo))
+			Axios.post('http://127.0.0.1:8000/api/signup/', signupInfo)
         .then((res) => {
 					localStorage.setItem('token', res.data.token);
 					props.history.push('/');

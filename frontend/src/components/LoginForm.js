@@ -18,7 +18,7 @@ const LoginForm = (props) => {
       password: password
     };
 		
-    Axios.post('http://127.0.0.1:8000/api/login/', JSON.stringify(loginInfo))
+    Axios.post('http://127.0.0.1:8000/api/login/', loginInfo)
       .then((res) => {
         localStorage.setItem('token', res.data.token);
         props.history.push('/fuelquote');

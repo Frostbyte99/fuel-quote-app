@@ -143,8 +143,8 @@ def quoteDelete(request, pk):
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
-def login(request, format=None):
-	serializer = LoginSerializerWithToken(data=request.data)
+def login(request):
+	#serializer = LoginSerializerWithToken(data=request.data)
 	user = UserSerializer(data=request.data)
 
 	if user.is_valid():
@@ -152,6 +152,7 @@ def login(request, format=None):
 		return Response({'token': token.key}, status=HTTP_200_OK)
 		#return Response({'token': 'token.key'})
 
+	print(user.errors)
 	errorMessage = 'Password or username is incorrect'
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
 
@@ -164,8 +165,9 @@ def signup(request):
 	if serializer.is_valid():
 		serializer.save()
 		return Response({'token': 'token.key'})
-
-	errorMessage = 'Failed to sign up'
+		
+	print(serializer.errors)
+	errorMessage = serializer.data
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
 
     
@@ -175,6 +177,8 @@ def signup(request):
 # User Model
 
 @api_view(['GET'])
+@csrf_exempt
+@permission_classes((AllowAny,))
 def userList(request):
 	user = UserCredentials.objects.all().order_by('-id')
 	serializer = UserSerializer(user, many=True)
