@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "../styles.css";
-import axios from 'axios';
+import Axios from 'axios';
 
 const FormSignup = (props) => {
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [passwordError, setPasswordError] = useState();
+	const [serverRes, setServerRes] = useState();
+
+/*	
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -34,6 +37,26 @@ const FormSignup = (props) => {
       props.history.push("/");
     }
   };
+*/
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		// reset error before every submit
+				setServerRes('');
+		if (password !== confirmPassword) {
+			setPasswordError("Passwords must match");
+		} else {
+			Axios.post('http://127.0.0.1:8000/api/signup/', {
+				userName,
+				password,
+				}).then((res) => {
+					localStorage.setItem('token', res.data.token);
+					props.history.push('/fuelquote');
+				}).catch((err) => {
+					//setServerRes('Incorrect email or password.');
+					setServerRes(JSON.stringify(err.response.data));
+			});
+		}
+	}
 
   const loginStyle = {
     color: "blue",
