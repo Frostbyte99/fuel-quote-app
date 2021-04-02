@@ -42,18 +42,20 @@ const FormSignup = (props) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-    const loginInfo = {
+    const signupInfo = {
       userName: userName,
-      password: password
+      password: password,
+      passwordConfirm: confirmPassword
     };
 
 		// reset error before every submit
-				setServerRes('');
+		setServerRes('');
+    setConfirmPassword('');
 		if (password !== confirmPassword) {
 			setPasswordError("Passwords must match");
 		} else {
-			Axios.post('http://127.0.0.1:8000/api/signup/', JSON.stringify(loginInfo))
-      .then((res) => {
+			Axios.post('http://127.0.0.1:8000/api/signup/', JSON.stringify(signupInfo))
+        .then((res) => {
 					localStorage.setItem('token', res.data.token);
 					props.history.push('/');
           console.log(res);

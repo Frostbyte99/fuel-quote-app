@@ -12,11 +12,14 @@ const LoginForm = (props) => {
     event.preventDefault();
 		// reset error before every submit
     setServerRes('');
+
+    const loginInfo = {
+      userName: user,
+      password: password
+    };
 		
-    Axios.post('http://127.0.0.1:8000/api/login/', {
-        userName: user,
-        password: password,
-		  }).then((res) => {
+    Axios.post('http://127.0.0.1:8000/api/login/', JSON.stringify(loginInfo))
+      .then((res) => {
         localStorage.setItem('token', res.data.token);
         props.history.push('/fuelquote');
 		  }).catch((err) => {
