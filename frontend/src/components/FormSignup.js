@@ -50,6 +50,7 @@ const FormSignup = (props) => {
 
 		// reset error before every submit
 		setServerRes('');
+    setPasswordError('');
     setConfirmPassword('');
 		if (password !== confirmPassword) {
 			setPasswordError("Passwords must match");
