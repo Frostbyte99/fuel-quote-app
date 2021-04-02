@@ -144,13 +144,13 @@ def quoteDelete(request, pk):
 @api_view(["POST"])
 @permission_classes((AllowAny,))
 def login(request, format=None):
-	#serializer = LoginSerializerWithToken(data=request.data)
+	serializer = LoginSerializerWithToken(data=request.data)
 	user = UserSerializer(data=request.data)
 
 	if user.is_valid():
-		#token, _ = Token.objects.get_or_create(user=user)
-		#return Response({'token': token.key}, status=HTTP_200_OK)
-		return Response({'token': 'token.key'})
+		token = Token.objects.get_or_create(user=user)
+		return Response({'token': token.key}, status=HTTP_200_OK)
+		#return Response({'token': 'token.key'})
 
 	errorMessage = 'Password or username is incorrect'
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
@@ -160,7 +160,7 @@ def signup(request):
 	serializer = UserSerializer(data=request.data)
 
 	if serializer.is_valid():
-		#serializer.save()
+		serializer.save()
 		return Response({'token': 'token.key'})
 
 	errorMessage = 'Failed to sign up'

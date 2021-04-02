@@ -47,14 +47,18 @@ const FormSignup = (props) => {
 			setPasswordError("Passwords must match");
 		} else {
 			Axios.post('http://127.0.0.1:8000/api/signup/', {
-				userName,
-				password,
+				  userName: userName,
+				  password: password,
 				}).then((res) => {
 					localStorage.setItem('token', res.data.token);
-					props.history.push('/fuelquote');
+					props.history.push('/');
 				}).catch((err) => {
-					//setServerRes('Incorrect email or password.');
-					setServerRes(JSON.stringify(err.response.data));
+					if(err.response) {
+            setServerRes(JSON.stringify(err.response.data));
+          }
+          else {
+            setServerRes('An Error Occured');
+          }
 			});
 		}
 	}
@@ -116,6 +120,9 @@ const FormSignup = (props) => {
           />
           <p className="text-danger text-left">
             <small>{passwordError}</small>
+          </p>
+          <p className="text-danger text-left">
+            <small>{serverRes}</small>
           </p>
         </div>
         <button className="login-signup-btn" type="submit">
