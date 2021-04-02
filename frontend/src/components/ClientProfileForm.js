@@ -6,6 +6,7 @@ import "../styles.css";
 import axios from 'axios';
 
 const ClientProfileForm = (props) => {
+    //These should be set to the Client's Info from DB (if found):
     const [userID, setUserID] = useState(
       "f30e8d27-e64e-437a-a629-c38ec9ebb4f4"
     );
@@ -37,7 +38,7 @@ const ClientProfileForm = (props) => {
             // console.log(res.data);
         });
         
-        localStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
+        sessionStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
         // redirect to Fuel Quote Page
         props.history.push('/fuelquote'); //Home
     };

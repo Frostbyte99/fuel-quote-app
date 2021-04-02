@@ -20,6 +20,7 @@ const FormSignup = (props) => {
     if (password !== confirmPassword) {
       setPasswordError("Passwords must match");
     } else {
+      setPasswordError("");
       //redirect to login page
 
       JSON.stringify(signUpObject);
