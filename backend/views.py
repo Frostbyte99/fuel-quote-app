@@ -1,6 +1,18 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
+
+from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.status import (
+    HTTP_400_BAD_REQUEST,
+    HTTP_404_NOT_FOUND,
+    HTTP_200_OK
+)
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ProfileSerializer
@@ -112,14 +124,25 @@ def quoteDelete(request, pk):
 
 	return Response('Quote item deleted')
     
-@api_view(['POST'])
+#@api_view(['POST'])
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((AllowAny,))
 def login(request, format=None):
-    serializer = LoginSerializerWithToken(data=request.data)
+    #serializer = LoginSerializerWithToken(data=request.data)
+    user = UserSerializer(data= request.data)
 
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors)
+    if user.is_valid():
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key},
+                    status=HTTP_200_OK)
+
+    errorMessage = 'username or password incorrect'
+    return Response({'error': errorMessage})
+
+    
+
+    
 
 # User Model
 
