@@ -1,21 +1,96 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
+import { Link } from "react-router-dom";
 import "../styles.css";
 
 class FuelQuoteHistory extends React.Component {
-   
-    state = {
-        data: [0, -1]
-    };
+
+    constructor() {
+        super();
+        console.log("Here!");
+        this.state = {
+            data: [0, -1]
+        };
+        this.nextId = 0;
+        let fuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation'));
+        let quotesToStore = [];
+        console.log("fuelQuotes: "+JSON.stringify(fuelQuotes));
+        if(Array.isArray(fuelQuotes)) {
+            console.log("length = "+fuelQuotes.length);
+            for(let i=0; i < fuelQuotes.length; i++) {
+                console.log("-"+i+"-")
+                this.appendRow();
+                quotesToStore.push(fuelQuotes[i]);
+            }
+        }
+        else { //Only 1 fuel quote
+            this.appendRow();
+            if(!fuelQuotes) {
+                quotesToStore.push(fuelQuotes);
+            }
+        }
+        if(!fuelQuotes) {
+            localStorage.clear();
+            localStorage.setItem('fuelQuoteInformation', JSON.stringify(quotesToStore)); //Makes a new item, instead of updating for some reason
+        }
+    }
+
+    // state = {
+    //     data: [0, -1]
+    // };
     
     appendRow = () => {
-        if(data[0] === 0) { data.shift() }
-        let { data } = this.state;
-        data[data.length-1] = data.length;
-        data.push(-1);
-        this.setState({data});
+        this.nextId += 1;
+        console.log("data: "+this.state.data);
+        const fuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation')); //for now
+        if(Array.isArray(fuelQuotes)) {
+            for(let i = 0; i < this.state.data.length; i++) { //Check if any faulty data in history
+                console.log("--in appendRow checker at index "+i);
+                const fuelQuote = fuelQuotes[i];
+                const clientInfo = fuelQuote!=null ? fuelQuote.clientInfo : null;
+                if((fuelQuote===undefined || fuelQuote===null || clientInfo===null) && this.state.data[i] > 0) {
+                    console.log("before splice: "+this.state.data+" i = "+i);
+                    this.state.data.splice(i, 1); //Remove this item
+                    i--;
+                    console.log("after splice: "+this.state.data+" i = "+i);
+                }
+                // else if(this.state.data[i] === 0) {
+                //     this.state.data.splice(i, 1);
+                //     i--;
+                // }
+            }
+        }
+        else {
+            const fuelQuote = fuelQuotes;
+            const clientInfo = fuelQuote!=null ? fuelQuote.clientInfo : null;
+            if((fuelQuote===undefined || fuelQuote===null || clientInfo===null) && this.state.data[0] > 0) {
+                this.state.data = [0, -1]; //Reset to default
+            }
+            else {
+                this.state.data = [this.nextId, -1];
+            }
+            return;
+        }
+
+        if(this.state.data[0] < 0) { //Means data = [-1]
+            this.state.data = [0, -1];
+            console.log("RESET EMPTY DATA TO DEFAULT");
+            return;
+        }
+        
+        if(this.state.data[0] === 0) { this.state.data.shift() } //Remove default empty row
+        
+        this.state.data[this.state.data.length-1] = this.nextId; //Overwrite end of history row with new row id
+        this.state.data.push(-1); //Add end of history row
+        console.log(this.state.data);
+        //this.state.data = data;
     };
+
+    clearLocalHistory = () => {
+        this.state = [0, -1];
+        localStorage.clear();
+    }
     
     render(){
     return (
@@ -39,24 +114,39 @@ class FuelQuoteHistory extends React.Component {
                     </tbody>
                 </table>
             </div>
+            <div className="bottom">
+                <Link to="/fuelquotehistory">
+                    <button onClick={this.clearLocalHistory}>Clear Fuel Quote History</button>
+                </Link>
+            </div>
         </div>
     )
     }
 }
 
 const Row = ({ id }) => {
-    const fuelQuote = JSON.parse(localStorage.getItem('fuelQuoteInformation')); //for now
+    if(id < 0) {
+        return (
+            <tr> <td colSpan="9" id="lastLine">End of Fuel Quote History</td> </tr>
+        );
+    }
+    const fuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation')); //for now
+    const fuelQuote = Array.isArray(fuelQuotes) ? (id===0 ? fuelQuotes[0]: fuelQuotes[id-1]) : fuelQuotes;
+    console.log(JSON.stringify(fuelQuotes));
+    console.log(JSON.stringify(fuelQuote));
     const clientInfo = fuelQuote!=null ? fuelQuote.clientInfo : null;
+    console.log(JSON.stringify(clientInfo));
+    
+    //Note: if clientInfo is null, that fuel quote is invalid and should be flagged
     if(id === 0 && (fuelQuote===null || clientInfo===null)){
         return (
             <tr> <td colSpan="9" id="blankLine" height="20px"></td> </tr>
         );
     }
-    if(id === -1 || fuelQuote==null || clientInfo==null) {
+    if(id > 0 && (fuelQuote===null || clientInfo===null)){
         return (
-            <tr> <td colSpan="9" id="lastLine">End of Fuel Quote History</td> </tr>
+            <tr> <td colSpan="9" id="blankLine" height="20px">Cleared</td> </tr>
         );
-        //Note: if clientInfo null, that fuel quote is invalid and should be flagged
     }
 
     return (
