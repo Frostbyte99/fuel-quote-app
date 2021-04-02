@@ -8,17 +8,20 @@ from .serializers import QuoteSerializer
 from .serializers import UserSerializer
 from .serializers import LoginSerializerWithToken
 from .models import ClientInformation, FuelQuote, UserCredentials
+
 # Create your views here.
 
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = {
 		'Profile List' : '/profile-list/',
+		'Profile List User' : 'profile-list-user/<userName>/',
 		'Profile Detail' : '/profile-detail/',
 		'Profile Create' : '/profile-create/',
 		'Profile Update' : '/profile-update/',
 		'Profile Delete' : '/profile-delete/',
 		'Quote List' : '/quote-list/',
+		'Quote List User' : '/quote-list-user/<userName>/',
 		'Quote Detail' : '/quote-detail/',
 		'Quote Create' : '/quote-create/',
 		'Quote Update' : '/quote-update/',
@@ -35,20 +38,25 @@ def apiOverview(request):
 
 @api_view(['GET'])
 def profileList(request):
-	profile = ClientInformation.objects.all().order_by('-id')
+	profile = ClientInformation.objects.all().order_by('-userName')
+	serializer = ProfileSerializer(profile, many=True)
+	return Response(serializer.data)
+
+@api_view(['GET'])
+def profileListUsers(request, pk):
+	profile = ClientInformation.objects.filter(userName=pk)
 	serializer = ProfileSerializer(profile, many=True)
 	return Response(serializer.data)
 
 @api_view(['GET'])
 def profileDetail(request, pk):
-	profile = ClientInformation.objects.get(userID=pk)
+	profile = ClientInformation.objects.get(userName=pk)
 	serializer = ProfileSerializer(profile, many=False)
 	return Response(serializer.data)
 
 @api_view(['POST'])
 def profileCreate(request):
 	serializer = ProfileSerializer(data=request.data)
-
 	if serializer.is_valid():
 		serializer.save()
 	
@@ -80,8 +88,14 @@ def quoteList(request):
 	return Response(serializer.data)
 
 @api_view(['GET'])
+def quoteListUsers(request, pk):
+	quote = FuelQuote.objects.filter(userName=pk)
+	serializer = QuoteSerializer(quote, many=True)
+	return Response(serializer.data)
+
+@api_view(['GET'])
 def quoteDetail(request, pk):
-	quote = FuelQuote.objects.filter(userID=pk)
+	quote = FuelQuote.objects.filter(userName=pk)
 	serializer = QuoteSerializer(quote, many=True)
 
 	return Response(serializer.data)
@@ -125,7 +139,7 @@ def login(request, format=None):
 
 @api_view(['GET'])
 def userList(request):
-	user = UserCredentials.objects.all().order_by('-userID')
+	user = UserCredentials.objects.all().order_by('-id')
 	serializer = UserSerializer(user, many=True)
 
 	return Response(serializer.data)

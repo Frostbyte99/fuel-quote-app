@@ -4,12 +4,14 @@ from . import views
 urlpatterns = [
 	# Profile API
 	path('profile-list/', views.profileList, name="profile-list"),
+	path('profile-list-user/<str:pk>/', views.profileListUsers, name="profile-list-user"),
 	path('profile-detail/<str:pk>/', views.profileDetail, name="profile-detail"),
 	path('profile-create/', views.profileCreate, name="profile-create"),
 	path('profile-update/<str:pk>/', views.profileUpdate, name="profile-update"),
 	path('profile-delete/<str:pk>/', views.profileDelete, name="profile-delete"),
 	# Quote API
 	path('quote-list/', views.quoteList, name="quote-list"),
+	path('quote-list-user/<str:pk>/', views.quoteListUsers, name="quote-list-user"),
 	path('quote-detail/<str:pk>/', views.quoteDetail, name="quote-detail"),
 	path('quote-create/', views.quoteCreate, name="quote-create"),
 	path('quote-update/<str:pk>/', views.quoteUpdate, name="quote-update"),
