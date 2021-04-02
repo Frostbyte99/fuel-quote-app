@@ -36,6 +36,7 @@ def apiOverview(request):
 		'Quote Update' : '/quote-update/',
 		'Quote Delete' : '/quote-delete/',
     	'Login User' : '/login/',
+        'Signup User' : '/signup/',
 		'User List' : '/user-list/',
 		'User Create' : '/user-create/',
 		'User UUID' : 'user-getUserUUID/<str:pk>/',
@@ -129,16 +130,27 @@ def quoteDelete(request, pk):
 @api_view(["POST"])
 @permission_classes((AllowAny,))
 def login(request, format=None):
-    #serializer = LoginSerializerWithToken(data=request.data)
-    user = UserSerializer(data= request.data)
+	#serializer = LoginSerializerWithToken(data=request.data)
+	user = UserSerializer(data=request.data)
 
-    if user.is_valid():
-        token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key},
-                    status=HTTP_200_OK)
+	if user.is_valid():
+		#token, _ = Token.objects.get_or_create(user=user)
+		#return Response({'token': token.key}, status=HTTP_200_OK)
+		return Response({'token': 'token.key'})
 
-    errorMessage = 'username or password incorrect'
-    return Response({'error': errorMessage})
+	errorMessage = 'Password or username is incorrect'
+	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def signup(request):
+	serializer = UserSerializer(data=request.data)
+
+	if serializer.is_valid():
+		#serializer.save()
+		return Response({'token': 'token.key'})
+
+	errorMessage = 'Failed to sign up'
+	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
 
     
 
