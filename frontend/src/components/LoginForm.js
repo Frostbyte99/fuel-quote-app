@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const LoginForm = (props) => {
     const [user, setUser] = useState();
     const [password, setPassword] = useState('');
+	const [serverRes, setServerRes] = useState();
 
     const onSubmit = (event) => {
         event.preventDefault();
-        props.history.push('/fuelquote');
+		// reset error before every submit
+        setServerRes('');
+		Axios.post('http://127.0.0.1:8000/api/login/', {
+			userName: user,
+			password,
+		  }).then((res) => {
+			localStorage.setItem('token', res.data.token);
+			props.history.push('/fuelquote');
+		  }).catch((err) => {
+				//setServerRes('Incorrect email or password.');
+				setServerRes(JSON.stringify(err.response.data));
+		});
     }
 
       return (
@@ -35,6 +48,11 @@ const LoginForm = (props) => {
             />
             <input className="login-signup-btn" type="submit" value="Log In" />
           </form>
+					<p className="text-danger text-left">
+						<small>
+							{ serverRes }
+						</small>
+					</p>
           <small>Don&apos;t have an account? Sign&nbsp;up&nbsp;
             <Link to="/signup">here</Link>
           </small>
