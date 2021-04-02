@@ -155,7 +155,9 @@ def login(request, format=None):
 	errorMessage = 'Password or username is incorrect'
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
 
+@csrf_exempt
 @api_view(['POST'])
+@permission_classes((AllowAny,))
 def signup(request):
 	serializer = UserSerializer(data=request.data)
 
