@@ -76,10 +76,13 @@ def profileDetail(request, pk):
 @permission_classes((AllowAny,))
 @api_view(['POST'])
 def profileCreate(request):
+	print(request.data)
 	serializer = ProfileSerializer(data=request.data)
+	
 	if serializer.is_valid():
 		serializer.save()
 
+	print(serializer.errors)
 	return Response(serializer.data)
 
 
@@ -183,7 +186,6 @@ def login(request):
 
 	errorMessage = 'Password or username is incorrect'
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
-
 
 @csrf_exempt
 @api_view(['POST'])

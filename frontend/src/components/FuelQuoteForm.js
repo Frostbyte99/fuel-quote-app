@@ -66,21 +66,21 @@ const FuelQuoteForm = () => {
     localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuotes));
 
     //Post to DB:
-    let f  = {
+    const f  = {
       userName: sessionStorage.getItem('username'),
       gallons: gallons,
       address: address,
       deliveryDate: deliveryDate,
-      totalPrice: totalPrice,
+      totalPrice: totalPrice
     };
-    console.log(JSON.stringify(f));
+    console.log(f);
     Axios.post('http://127.0.0.1:8000/api/quote-create/', f);
     clearFuelQuote();
   };
 
   const clearFuelQuote = () => {
     setDeliveryDate("");
-    setGallons("");
+    setGallons("")
     setTotalPrice(0);
   };
 
