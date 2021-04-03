@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
-
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
@@ -23,7 +22,6 @@ from .models import ClientInformation, FuelQuote, UserCredentials
 import json
 
 # Create your views here.
-
 
 @api_view(['GET'])
 def apiOverview(request):
@@ -50,7 +48,6 @@ def apiOverview(request):
 	return Response(api_urls)
 
 # Profile Model
-
 
 @permission_classes((AllowAny,))
 @api_view(['GET'])
