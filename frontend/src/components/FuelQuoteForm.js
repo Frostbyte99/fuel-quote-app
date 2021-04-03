@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
+import Axios from 'axios';
 // import FuelQuoteHistory from "./FuelQuoteHistory";
 import "../styles.css";
 import axios from "axios";
@@ -63,6 +64,17 @@ const FuelQuoteForm = () => {
     
     localStorage.clear(); //clear previous fuelQuoteInformation
     localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuotes));
+
+    //Post to DB:
+    let f  = {
+      userName: sessionStorage.getItem('username'),
+      gallons: gallons,
+      address: address,
+      deliveryDate: deliveryDate,
+      totalPrice: totalPrice,
+    };
+    console.log(JSON.stringify(f));
+    Axios.post('http://127.0.0.1:8000/api/quote-create/', f);
     clearFuelQuote();
   };
 
