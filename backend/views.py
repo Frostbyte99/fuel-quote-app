@@ -40,8 +40,8 @@ def apiOverview(request):
 		'Quote Create': '/quote-create/',
 		'Quote Update': '/quote-update/',
 		'Quote Delete': '/quote-delete/',
-            'Login User': '/login/',
-            'Signup User': '/signup/',
+        'Login User': '/login/',
+        'Signup User': '/signup/',
 		'User List': '/user-list/',
 		'User Create': '/user-create/',
 		'User UUID': 'user-getUserUUID/<str:pk>/',
@@ -182,6 +182,7 @@ def login(request):
 	if password == dbPassword:
 		#return Response(status=HTTP_200_OK)
 		token = Token.objects.get_or_create(user=serializer)
+		return Response({'token': token.key}, status=HTTP_200_OK)
 
 	errorMessage = 'Password or username is incorrect'
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
