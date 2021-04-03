@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
@@ -16,8 +16,26 @@ const ClientProfileForm = (props) => {
     const [city, setCity]= useState();
     const [usState, setUsState] = useState();
     const [zipcode, setZipCode] = useState();
+		const [errorMessage, setErrorMessage] = useState();
 
     //fetchProfile();
+		useEffect(() => {
+			const currentUserName = 'TestUser';
+			axios.get(`http://127.0.0.1:8000/api/profile-list-user/${currentUserName}/`)
+				.then((res) => {
+					setFullName(res.data[0].fullName);
+					setAddress1(res.data[0].address1);
+					setAddress2(res.data[0].address2);
+					setCity(res.data[0].city);
+					setUsState(res.data[0].usState);
+					setZipCode(res.data[0].zipcode);
+				}).catch((err) => {
+					setErrorMessage("Current userName provided is not valid");
+
+			});
+		}, []);
+
+
     const onSubmit = (event) => {
         event.preventDefault();
         setUserID("f30e8d27-e64e-437a-a629-c38ec9ebb4f4");
@@ -170,6 +188,12 @@ const ClientProfileForm = (props) => {
                         </div>
                     </div>
                     <input className="login-signup-btn w-50" type="submit" value="Submit" />
+
+										<p className="text-danger text-left">
+											<small>
+												{ errorMessage }
+											</small>
+										</p>
                 </form>
             </div>
         </div>
