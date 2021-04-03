@@ -21,6 +21,7 @@ const LoginForm = (props) => {
     Axios.post('http://127.0.0.1:8000/api/login/', loginInfo)
       .then((res) => {
         localStorage.setItem('token', res.data.token);
+        sessionStorage.setItem('username', user);
         props.history.push('/fuelquote');
 		  }).catch((err) => {
 				if(err.response) {
