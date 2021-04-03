@@ -18,7 +18,7 @@ urlpatterns = [
 	path('quote-delete/<str:pk>/', views.quoteDelete, name="quote-delete"),
 	#Login
 	path('login/', views.login, name="login"),
-  path('signup/', views.signup, name="signup"),
+  	path('signup/', views.signup, name="signup"),
 	# User API
 	path('user-list/', views.userList, name="user-list"),
 	path('user-create/', views.userCreate, name="user-create"),
