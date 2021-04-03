@@ -21,6 +21,8 @@ from .serializers import UserSerializer
 from .serializers import LoginSerializerWithToken
 from .models import ClientInformation, FuelQuote, UserCredentials
 
+import json
+
 # Create your views here.
 
 @api_view(['GET'])
@@ -49,24 +51,32 @@ def apiOverview(request):
 
 # Profile Model
 
+
+@permission_classes((AllowAny,))
 @api_view(['GET'])
 def profileList(request):
 	profile = ClientInformation.objects.all().order_by('-userName')
 	serializer = ProfileSerializer(profile, many=True)
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['GET'])
 def profileListUsers(request, pk):
 	profile = ClientInformation.objects.filter(userName=pk)
 	serializer = ProfileSerializer(profile, many=True)
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['GET'])
 def profileDetail(request, pk):
 	profile = ClientInformation.objects.get(userName=pk)
 	serializer = ProfileSerializer(profile, many=False)
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['POST'])
 def profileCreate(request):
 	serializer = ProfileSerializer(data=request.data)
@@ -75,6 +85,8 @@ def profileCreate(request):
 	
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['POST'])
 def profileUpdate(request, pk):
 	profile = ClientInformation.objects.get(id=pk)
@@ -85,6 +97,8 @@ def profileUpdate(request, pk):
 	
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['DELETE'])
 def profileDelete(request, pk):
 	profile = ClientInformation.objects.get(id=pk)
@@ -94,18 +108,24 @@ def profileDelete(request, pk):
 
 # Fuel Quote Model
 
+
+@permission_classes((AllowAny,))
 @api_view(['GET'])
 def quoteList(request):
 	quote = FuelQuote.objects.all().order_by('-id')
 	serializer = QuoteSerializer(quote, many=True)
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['GET'])
 def quoteListUsers(request, pk):
 	quote = FuelQuote.objects.filter(userName=pk)
 	serializer = QuoteSerializer(quote, many=True)
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['GET'])
 def quoteDetail(request, pk):
 	quote = FuelQuote.objects.filter(userName=pk)
@@ -113,6 +133,8 @@ def quoteDetail(request, pk):
 
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['POST'])
 def quoteCreate(request):
 	serializer = QuoteSerializer(data=request.data)
@@ -122,6 +144,8 @@ def quoteCreate(request):
 
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['POST'])
 def quoteUpdate(request, pk):
 	quote = FuelQuote.objects.get(id=pk)
@@ -132,6 +156,8 @@ def quoteUpdate(request, pk):
 
 	return Response(serializer.data)
 
+
+@permission_classes((AllowAny,))
 @api_view(['DELETE'])
 def quoteDelete(request, pk):
 	quote = FuelQuote.objects.get(id=pk)
@@ -145,14 +171,20 @@ def quoteDelete(request, pk):
 @permission_classes((AllowAny,))
 def login(request):
 	#serializer = LoginSerializerWithToken(data=request.data)
-	user = UserSerializer(data=request.data)
+	#user = UserSerializer(data=request.data)
+	username = request.data['userName']
+	password = request.data['password']
+	
+	dbUser = UserCredentials.objects.get(userName=username)
+	serializer = UserSerializer(dbUser, many=False)
+	dbUsername = getattr(dbUser, 'userName')
+	dbPassword = getattr(dbUser, 'password')
 
-	if user.is_valid():
-		token = Token.objects.get_or_create(user=user)
+	if password == dbPassword:
+		#return Response(status=HTTP_200_OK)
+		token = Token.objects.get_or_create(user=serializer)
 		return Response({'token': token.key}, status=HTTP_200_OK)
-		#return Response({'token': 'token.key'})
-
-	print(user.errors)
+	
 	errorMessage = 'Password or username is incorrect'
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
 
