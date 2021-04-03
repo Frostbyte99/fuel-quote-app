@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
+import Axios from 'axios';
 import "../styles.css";
 
 class FuelQuoteHistory extends React.Component {
@@ -13,6 +14,13 @@ class FuelQuoteHistory extends React.Component {
             data: [0, -1]
         };
         this.nextId = 0;
+        let username = sessionStorage.getItem('username');
+        username = username ? username : 0;
+        Axios.get(`http://127.0.0.1:8000/api/quote-list-user/${username}`)
+            .then((res) => {
+                console.log("response data: "+res.data);
+                //localStorage.setItem('fuelQuoteInformation', res.data);
+            });
         let fuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation'));
         let quotesToStore = [];
         console.log("fuelQuotes: "+JSON.stringify(fuelQuotes));
