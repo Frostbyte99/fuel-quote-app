@@ -165,7 +165,7 @@ def quoteDelete(request, pk):
 
 	return Response('Quote item deleted')
     
-#@api_view(['POST'])
+
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
@@ -188,6 +188,7 @@ def login(request):
 	errorMessage = 'Password or username is incorrect'
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
 
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes((AllowAny,))
@@ -202,15 +203,11 @@ def signup(request):
 	errorMessage = serializer.data
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
 
-    
-
-    
-
 # User Model
 
+@permission_classes((AllowAny,))
 @api_view(['GET'])
 @csrf_exempt
-@permission_classes((AllowAny,))
 def userList(request):
 	user = UserCredentials.objects.all().order_by('-id')
 	serializer = UserSerializer(user, many=True)

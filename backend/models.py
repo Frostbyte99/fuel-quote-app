@@ -1,8 +1,9 @@
 from django.db import models
+from django_cryptography.fields import encrypt
 
 class UserCredentials(models.Model):
   userName = models.CharField(max_length=100, unique=True)
-  password = models.CharField(max_length=200)
+  password = encrypt(models.CharField(max_length=200))
 
 class ClientInformation(models.Model):
   userName = models.CharField(max_length=100, blank=True, null=True)
