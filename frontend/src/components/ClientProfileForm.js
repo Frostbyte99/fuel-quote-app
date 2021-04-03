@@ -16,24 +16,24 @@ const ClientProfileForm = (props) => {
     const [city, setCity]= useState();
     const [usState, setUsState] = useState();
     const [zipcode, setZipCode] = useState();
-		const [errorMessage, setErrorMessage] = useState();
+    const [errorMessage, setErrorMessage] = useState();
 
     //fetchProfile();
-		useEffect(() => {
-			const currentUserName = 'TestUser';
-			axios.get(`http://127.0.0.1:8000/api/profile-list-user/${currentUserName}/`)
-				.then((res) => {
-					setFullName(res.data[0].fullName);
-					setAddress1(res.data[0].address1);
-					setAddress2(res.data[0].address2);
-					setCity(res.data[0].city);
-					setUsState(res.data[0].usState);
-					setZipCode(res.data[0].zipcode);
-				}).catch((err) => {
-					setErrorMessage("Current userName provided is not valid");
+    useEffect(() => {
+      const currentUserName = 'TestUser';
+      axios.get(`http://127.0.0.1:8000/api/profile-list-user/${currentUserName}/`)
+        .then((res) => {
+          setFullName(res.data[0].fullName);
+          setAddress1(res.data[0].address1);
+          setAddress2(res.data[0].address2);
+          setCity(res.data[0].city);
+          setUsState(res.data[0].usState);
+          setZipCode(res.data[0].zipcode);
+        }).catch((err) => {
+          setErrorMessage("Current userName provided is not valid");
 
-			});
-		}, []);
+      });
+    }, []);
 
 
     const onSubmit = (event) => {
