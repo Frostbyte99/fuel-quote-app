@@ -46,12 +46,23 @@ const FuelQuoteForm = () => {
         // console.log(res.data);
       });
     
-    const storedFuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation'));
-    // (for loop) extract all fuel quotes in JSON, add `{[ , , , newFuelQuote]}` accordingly to store new element
-    // or just add new element to the JSON array somehow
-    // let fuelQuotes = ...;
-    // localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuotes));
-    localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuote));
+    let storedFuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation'));
+    console.log("storedFuelQuotes: "+JSON.stringify(storedFuelQuotes));
+    let fuelQuotes = [];
+    if((storedFuelQuotes !== undefined || storedFuelQuotes !== null) && Array.isArray(storedFuelQuotes)) {
+      for(let i=0; i < storedFuelQuotes.length; i++) {
+        if(storedFuelQuotes[i] === undefined || storedFuelQuotes[i] === null) {
+          storedFuelQuotes.splice(i, 1);
+        }
+      }
+      fuelQuotes = storedFuelQuotes;
+      console.log("--copied--")
+    }
+    fuelQuotes.push(fuelQuote);
+    console.log("fuel quotes: "+JSON.stringify(fuelQuotes));
+    
+    localStorage.clear(); //clear previous fuelQuoteInformation
+    localStorage.setItem('fuelQuoteInformation', JSON.stringify(fuelQuotes));
     clearFuelQuote();
   };
 

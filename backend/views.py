@@ -18,7 +18,6 @@ from rest_framework.response import Response
 from .serializers import ProfileSerializer
 from .serializers import QuoteSerializer
 from .serializers import UserSerializer
-from .serializers import LoginSerializerWithToken
 from .models import ClientInformation, FuelQuote, UserCredentials
 
 import json
@@ -166,7 +165,6 @@ def quoteDelete(request, pk):
 
 	return Response('Quote item deleted')
 
-
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
@@ -184,7 +182,6 @@ def login(request):
 	if password == dbPassword:
 		#return Response(status=HTTP_200_OK)
 		token = Token.objects.get_or_create(user=serializer)
-		return Response({'token': token.key}, status=HTTP_200_OK)
 
 	errorMessage = 'Password or username is incorrect'
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)

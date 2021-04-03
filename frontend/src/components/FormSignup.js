@@ -61,7 +61,12 @@ const FormSignup = (props) => {
           console.log(res);
 				}).catch((err) => {
 					if(err.response) {
-            setServerRes(JSON.stringify(err.response.data));
+            if(err.response.data.error.userName) {
+              setServerRes(err.response.data.error.userName+' is already a registered user');
+            }
+            else {
+              setServerRes(JSON.stringify(err.response.data.error));
+            }
           }
           else {
             setServerRes('An Error Occured');
