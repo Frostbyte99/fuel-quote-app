@@ -49,7 +49,7 @@ const ClientProfileForm = (props) => {
         };
 
         // TODO: modify variables so uploads for the current user
-        axios.post("http://127.0.0.1:8000/api/profile-create/", JSON.stringify(clientInformationObject))
+        axios.post("http://127.0.0.1:8000/api/profile-create/", clientInformationObject)
         .then(res => {
             // console.log(res);
             // console.log(res.data);
