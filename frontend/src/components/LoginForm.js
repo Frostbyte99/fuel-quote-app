@@ -24,12 +24,7 @@ const LoginForm = (props) => {
         sessionStorage.setItem('username', user);
         props.history.push('/fuelquote');
 		  }).catch((err) => {
-				if(err.response) {
-          setServerRes(JSON.stringify(err.response.data));
-        }
-        else {
-          setServerRes('Incorrect email or password.');
-        }
+        setServerRes("Incorrect username or password.");
 		});
   }
 
