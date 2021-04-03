@@ -18,7 +18,6 @@ from rest_framework.response import Response
 from .serializers import ProfileSerializer
 from .serializers import QuoteSerializer
 from .serializers import UserSerializer
-from .serializers import LoginSerializerWithToken
 from .models import ClientInformation, FuelQuote, UserCredentials
 
 # Create your views here.
@@ -144,7 +143,6 @@ def quoteDelete(request, pk):
 @api_view(["POST"])
 @permission_classes((AllowAny,))
 def login(request):
-	#serializer = LoginSerializerWithToken(data=request.data)
 	user = UserSerializer(data=request.data)
 
 	if user.is_valid():
