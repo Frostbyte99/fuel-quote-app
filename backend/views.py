@@ -42,7 +42,6 @@ def apiOverview(request):
         'Signup User': '/signup/',
 		'User List': '/user-list/',
 		'User Create': '/user-create/',
-		'User UUID': 'user-getUserUUID/<str:pk>/',
 	}
 
 	return Response(api_urls)
@@ -222,15 +221,6 @@ def userCreate(request):
 		serializer.save()
 
 	return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getUserUUID(request, pk):
-	user = UserCredentials.objects.get(userName=pk)
-	serializer = UserSerializer(user, many=False)
-
-	return Response(serializer.data['userID'])
-
 
 @api_view(['GET'])
 def isUserUnique(request, pk):
