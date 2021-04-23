@@ -31,7 +31,7 @@ def calculateTotalPrice(profileName, gallons):
         gallonsRequestedFactor = 0.03
 
     margin = currentPrice * (locationFactor - rateHistoryFactor + gallonsRequestedFactor + companyProfitFactor)
-    suggestedPrice = margin * currentPrice
+    suggestedPrice = margin + currentPrice
     totalPrice = suggestedPrice * gallons
 
     return totalPrice
