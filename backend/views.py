@@ -18,6 +18,7 @@ from .serializers import ProfileSerializer
 from .serializers import QuoteSerializer
 from .serializers import UserSerializer
 from .models import ClientInformation, FuelQuote, UserCredentials
+from .pricing_module import calculateTotalPrice
 
 import json
 
@@ -163,6 +164,16 @@ def quoteDelete(request, pk):
 	quote.delete()
 
 	return Response('Quote item deleted')
+
+
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def getQuotePrice(request, name, gallons):
+	
+	price = calculateTotalPrice(name, gallons)
+	price = json.dumps(price)
+	return Response(price)
+
 
 @csrf_exempt
 @api_view(["POST"])
