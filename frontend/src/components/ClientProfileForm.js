@@ -30,7 +30,7 @@ const ClientProfileForm = (props) => {
             setUsState(res.data[0].usState);
             setZipCode(res.data[0].zipcode);
         }).catch((err) => {
-            setErrorMessage(`Current userName provided (${currentUserName}) is not valid`);
+            //setErrorMessage(`Current userName provided (${currentUserName}) has no profile`);
       });
     }, []);
 
