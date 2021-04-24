@@ -53,12 +53,12 @@ const ClientProfileForm = (props) => {
         axios.post("http://127.0.0.1:8000/api/profile-create/", clientInformationObject)
         .then(res => {
             // console.log(res);
-            console.log(res.data);
+            //console.log(res.data);
         });
         
         sessionStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
         // redirect to Fuel Quote Page
-        //props.history.push('/fuelquote'); //Home
+        props.history.push('/fuelquote'); //Home
     };
 
     return (
