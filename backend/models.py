@@ -7,7 +7,7 @@ class UserCredentials(models.Model):
 class ClientInformation(models.Model):
   fullName = models.CharField(max_length=50, default="Example Name")
   address1 = models.CharField(max_length=100, default="Example Address 1")
-  address2 = models.CharField(max_length=100, default="Example Address 2")
+  address2 = models.CharField(max_length=100, blank=True)
   city = models.CharField(max_length=100, default="Example City")
   userName = models.CharField(max_length=100, blank=True, null=True)
   usState = models.CharField(max_length=2, default="TX")

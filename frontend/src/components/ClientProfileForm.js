@@ -38,6 +38,7 @@ const ClientProfileForm = (props) => {
     const onSubmit = (event) => {
         event.preventDefault();
         setUserID("f30e8d27-e64e-437a-a629-c38ec9ebb4f4");
+
         const clientInformationObject = {
             userName: sessionStorage.getItem('username'),
             fullName: fullName,
@@ -52,12 +53,12 @@ const ClientProfileForm = (props) => {
         axios.post("http://127.0.0.1:8000/api/profile-create/", clientInformationObject)
         .then(res => {
             // console.log(res);
-            // console.log(res.data);
+            console.log(res.data);
         });
         
         sessionStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
         // redirect to Fuel Quote Page
-        props.history.push('/fuelquote'); //Home
+        //props.history.push('/fuelquote'); //Home
     };
 
     return (

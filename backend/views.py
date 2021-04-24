@@ -81,9 +81,11 @@ def profileCreate(request):
 	
 	if serializer.is_valid():
 		serializer.save()
+		return Response(serializer.data)
+
 
 	print(serializer.errors)
-	return Response(serializer.data)
+	return Response(serializer.errors)
 
 
 @permission_classes((AllowAny,))
