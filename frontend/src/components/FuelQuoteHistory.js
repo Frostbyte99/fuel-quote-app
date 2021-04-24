@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
-import Axios from 'axios';
 import "../styles.css";
 
 class FuelQuoteHistory extends React.Component {
@@ -13,15 +12,8 @@ class FuelQuoteHistory extends React.Component {
             data: [0, -1]
         };
         this.nextId = 0;
-        let username = sessionStorage.getItem('username');
-        username = username ? username : 0;
-        console.log(username); //DEBUG
-        Axios.get(`http://127.0.0.1:8000/api/quote-list-user/${username}`)
-            .then((res) => {
-                console.log("response data: "+res.data);
-                //localStorage.setItem('fuelQuoteInformation', res.data);
-            });
-        const fuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation'));
+
+        let fuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation'));
         let quotesToStore = [];
         console.log("fuelQuotes: "+JSON.stringify(fuelQuotes));
         
@@ -45,8 +37,7 @@ class FuelQuoteHistory extends React.Component {
             const clientInfo = fuelQuote!=null ? fuelQuote.clientInfo : null;
             if((fuelQuote===undefined || fuelQuote===null || clientInfo===null) && this.state.data[0] > 0) {
                 this.state.data = [0, -1]; //Reset to default
-            }
-            else {
+            } else {
                 this.state.data = [this.nextId, -1];
             }
             return;
@@ -65,8 +56,7 @@ class FuelQuoteHistory extends React.Component {
                 this.appendRow();
                 quotesToStore.push(fuelQuotes[i]);
             }
-        }
-        else { //Non-array; Only 1 fuel quote
+        } else { //Non-array; Only 1 fuel quote
             this.appendRow();
             if(!fuelQuotes) {
                 quotesToStore.push(fuelQuotes);
@@ -92,37 +82,38 @@ class FuelQuoteHistory extends React.Component {
     clearLocalHistory = () => {
         this.state = [0, -1];
         localStorage.clear();
+        //Doesn't actually delete any data in the database
     }
     
-    render(){
-    return (
-        <div>
-            <NavBar />
-            <div className="tableDiv">
-                <table name="history" id="history">
-                    <thead>
-                        <th>Delivery Date</th>
-                        <th>Gallons</th>
-                        <th>Total Price</th>
-                        <th>Name</th>
-                        <th>Address 1</th>
-                        <th>Address 2</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zipcode</th>
-                    </thead>
-                    <tbody>
-                        {this.state.data.map(id => ( <Row id = {id} /> ))}
-                    </tbody>
-                </table>
+    render() {
+        return (
+            <div>
+                <NavBar />
+                <div className="tableDiv">
+                    <table name="history" id="history">
+                        <thead>
+                            <th>Delivery Date</th>
+                            <th>Gallons</th>
+                            <th>Total Price</th>
+                            <th>Name</th>
+                            <th>Address 1</th>
+                            <th>Address 2</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zipcode</th>
+                        </thead>
+                        <tbody>
+                            {this.state.data.map(id => ( <Row id = {id} /> ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="bottom">
+                    <Link to="/fuelquotehistory">
+                        <button onClick={this.clearLocalHistory}><b>CLEAR</b> Fuel Quote History</button>
+                    </Link>
+                </div>
             </div>
-            <div className="bottom">
-                <Link to="/fuelquotehistory">
-                    <button onClick={this.clearLocalHistory}><b>CLEAR</b> Fuel Quote History</button>
-                </Link>
-            </div>
-        </div>
-    )
+        )
     }
 }
 
@@ -133,24 +124,30 @@ const Row = ({ id }) => {
         );
     }
     const fuelQuotes = JSON.parse(localStorage.getItem('fuelQuoteInformation')); //for now
-    const fuelQuote = Array.isArray(fuelQuotes) ? (id===0 ? fuelQuotes[0]: fuelQuotes[id-1]) : fuelQuotes;
+    let fuelQuote = Array.isArray(fuelQuotes) ? (id===0 ? fuelQuotes[0]: fuelQuotes[id-1]) : fuelQuotes;
     //console.log(JSON.stringify(fuelQuotes)); //DEBUG
     //console.log(JSON.stringify(fuelQuote)); //DEBUG
-    const clientInfo = fuelQuote!=null ? fuelQuote.clientInfo : null;
-    //console.log(JSON.stringify(clientInfo)); //DEBUG
+
+    const clientInfo = sessionStorage.getItem('clientInfo') ? JSON.parse(sessionStorage.getItem('clientInfo')) : "";
+
+    //const clientInfo = (fuelQuote===null || fuelQuote===undefined) ? null : fuelQuote.clientInfo;
+    console.log("DEBUG: "+JSON.stringify(clientInfo)); //DEBUG
     
     //Note: if clientInfo is null, that fuel quote is invalid and should be flagged
-    if(id === 0 && (fuelQuote===null || clientInfo===null)){
+    if(id === 0 && (fuelQuote===null || fuelQuote===undefined || clientInfo===null)){
         return (
             <tr> <td colSpan="9" id="blankLine" height="20px"></td> </tr>
         );
     }
-    if(id > 0 && (fuelQuote===null || clientInfo===null)){
+    if(id > 0 && (fuelQuote===null || fuelQuote===undefined || clientInfo===null)){
         return (
             <tr> <td colSpan="9" id="blankLine" height="20px">Cleared</td> </tr>
         );
     }
 
+    //for(let i=0; i<4000 && !fuelQuote.clientInfo; i++) { console.log("__"); }
+
+    //console.log(JSON.stringify(fuelQuote));
     return (
         <tr id={`row-${id}`}>
             <td>{fuelQuote.deliveryDate}</td>
