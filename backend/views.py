@@ -207,8 +207,7 @@ def signup(request):
 		serializer.save()
 		return Response({'token': 'token.key'})
 
-	print(serializer.errors)
-	errorMessage = serializer.data
+	errorMessage = serializer.errors
 	return Response({'error': errorMessage}, status=HTTP_400_BAD_REQUEST)
 
 # User Model
