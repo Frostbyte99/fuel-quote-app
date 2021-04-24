@@ -5,31 +5,53 @@ import { Link } from "react-router-dom";
 import Axios from 'axios';
 // import FuelQuoteHistory from "./FuelQuoteHistory";
 import "../styles.css";
-import axios from "axios";
 
 const FuelQuoteForm = () => {
   const [userID, setUserID] = useState("f30e8d27-e64e-437a-a629-c38ec9ebb4f4");
   const [deliveryDate, setDeliveryDate] = useState();
   const [gallons, setGallons] = useState();
   const [totalPrice, setTotalPrice] = useState();
-	const [pricePerGallon, setPricePerGallon] = useState();
   const [fuelQuoteError, setFuelQuoteError] = useState();
-  const clientInfo = JSON.parse(sessionStorage.getItem('clientInformation'));
-  const address =
-    clientInfo != null
-      ? (clientInfo.address1 + " " + clientInfo.address2).trim()
-      : "";
-  //const pricePerGallon = 2.199; //would be calculated according to state/city/address
-    //Should come from DB
+  const [address, setAddress] = useState();
 
+  const [pricePerGallon, setPricePerGallon] = useState();    //Should come from DB
 
-		useEffect(() => {
-			axios.get('http://127.0.0.1:8000/api/quote-price/TestUser/1500/')
-				.then((res) => {
-					console.log(JSON.stringify(res));
-					setPricePerGallon(res.data)
-				});
-		}, []);
+  useEffect(() => {
+    const username = sessionStorage.getItem('username') ? sessionStorage.getItem('username') : "";
+    Axios.get(`http://127.0.0.1:8000/api/profile-list-user/${username}/`)
+      .then((res) => {
+        if(res.data[0]) {
+          setAddress((res.data[0].address1+" "+res.data[0].address2).trim());
+        }
+      });
+    Axios.get(`http://127.0.0.1:8000/api/quote-price/${username}/1/`)
+      .then((res) => {
+        if(res.data[0]) {
+          setPricePerGallon(res.data);
+        }
+      });
+    Axios.get(`http://127.0.0.1:8000/api/quote-list-user/${username}/`)
+      .then((res) => {
+        localStorage.setItem('fuelQuoteInformation', JSON.stringify(res.data));
+      });
+    Axios.get(`http://127.0.0.1:8000/api/profile-list-user/${username}/`)
+      .then((res) => {
+        if(res.data[0]) {
+          let clientInfo = {
+            userName: username,
+            fullName: res.data[0].fullName ? res.data[0].fullName : "",
+            address1: res.data[0].address1 ? res.data[0].address1 : "",
+            address2: res.data[0].address2 ? res.data[0].address2 : "",
+            city: res.data[0].city ? res.data[0].city : "",
+            usState: res.data[0].usState ? res.data[0].usState : "",
+            zipcode: res.data[0].zipcode ? res.data[0].zipcode : ""
+          }
+          //console.log("Client Info: "+JSON.stringify(clientInfo));
+          sessionStorage.removeItem('clientInfo');
+          sessionStorage.setItem('clientInfo', JSON.stringify(clientInfo));
+        }
+      });
+  }, []);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -43,15 +65,13 @@ const FuelQuoteForm = () => {
     
     const fuelQuote = {
       userID: userID,
-      clientInfo: clientInfo,
       gallons: gallons,
       address: address,
       deliveryDate: deliveryDate,
       totalPrice: totalPrice,
     };
 
-    axios
-      .post("http://127.0.0.1:8000/api/quote-create/", JSON.stringify(fuelQuote))
+    Axios.post("http://127.0.0.1:8000/api/quote-create/", JSON.stringify(fuelQuote))
       .then((res) => {
         // console.log(res);
         // console.log(res.data);
@@ -168,8 +188,7 @@ const FuelQuoteForm = () => {
               name="price-per-gallon"
               id="price-per-gallon"
               className="form-input readonly"
-              value={`$${Math.floor(pricePerGallon * 100) / 100} ${
-                (pricePerGallon * 1000) % 10 }/10`}
+              value={`$${Math.floor(pricePerGallon * 100) / 100} ${(pricePerGallon * 1000) % 10}/10`}
               readonly
               required
             />
@@ -197,8 +216,8 @@ const FuelQuoteForm = () => {
             className="login-signup-btn w-50"
           />
         </form>
-				
       </div>
+      
       <div className="bottom">
         <Link to="/fuelquotehistory">
           <button>See Fuel Quote History</button>
