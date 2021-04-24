@@ -28,6 +28,8 @@ const FuelQuoteForm = () => {
       .then((res) => {
         if(res.data[0]) {
           setPricePerGallon(res.data);
+        } else {
+          setAddress("");
         }
       });
     Axios.get(`http://127.0.0.1:8000/api/quote-list-user/${username}/`)
