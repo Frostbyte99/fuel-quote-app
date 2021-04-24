@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
@@ -12,14 +12,24 @@ const FuelQuoteForm = () => {
   const [deliveryDate, setDeliveryDate] = useState();
   const [gallons, setGallons] = useState();
   const [totalPrice, setTotalPrice] = useState();
+	const [pricePerGallon, setPricePerGallon] = useState();
   const [fuelQuoteError, setFuelQuoteError] = useState();
   const clientInfo = JSON.parse(sessionStorage.getItem('clientInformation'));
   const address =
     clientInfo != null
       ? (clientInfo.address1 + " " + clientInfo.address2).trim()
       : "";
-  const pricePerGallon = 2.199; //would be calculated according to state/city/address
+  //const pricePerGallon = 2.199; //would be calculated according to state/city/address
     //Should come from DB
+
+
+		useEffect(() => {
+			axios.get('http://127.0.0.1:8000/api/quote-price/TestUser/1500/')
+				.then((res) => {
+					console.log(JSON.stringify(res));
+					setPricePerGallon(res.data)
+				});
+		}, []);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -159,8 +169,7 @@ const FuelQuoteForm = () => {
               id="price-per-gallon"
               className="form-input readonly"
               value={`$${Math.floor(pricePerGallon * 100) / 100} ${
-                (pricePerGallon * 1000) % 10
-              }/10`}
+                (pricePerGallon * 1000) % 10 }/10`}
               readonly
               required
             />
@@ -188,6 +197,7 @@ const FuelQuoteForm = () => {
             className="login-signup-btn w-50"
           />
         </form>
+				
       </div>
       <div className="bottom">
         <Link to="/fuelquotehistory">
