@@ -90,8 +90,8 @@ def profileCreate(request):
 
 @permission_classes((AllowAny,))
 @api_view(['POST'])
-def profileUpdate(request, pk):
-	profile = ClientInformation.objects.get(id=pk)
+def profileUpdate(request, name):
+	profile = ClientInformation.objects.get(userName=name)
 	serializer = ProfileSerializer(instance=profile, data=request.data)
 
 	if serializer.is_valid():

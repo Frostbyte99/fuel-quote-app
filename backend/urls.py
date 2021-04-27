@@ -7,7 +7,7 @@ urlpatterns = [
 	path('profile-list-user/<str:pk>/', views.profileListUsers, name="profile-list-user"),
 	path('profile-detail/<str:pk>/', views.profileDetail, name="profile-detail"),
 	path('profile-create/', views.profileCreate, name="profile-create"),
-	path('profile-update/<str:pk>/', views.profileUpdate, name="profile-update"),
+	path('profile-update/<str:name>/', views.profileUpdate, name="profile-update"),
 	path('profile-delete/<str:pk>/', views.profileDelete, name="profile-delete"),
 	# Quote API
 	path('quote-list/', views.quoteList, name="quote-list"),
