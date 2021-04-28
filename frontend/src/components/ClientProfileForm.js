@@ -72,7 +72,7 @@ const ClientProfileForm = (props) => {
 
         sessionStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
         // redirect to Fuel Quote Page
-        //props.history.push('/fuelquote'); //Home
+        props.history.push('/fuelquote'); //Home
     };
 
     return (
