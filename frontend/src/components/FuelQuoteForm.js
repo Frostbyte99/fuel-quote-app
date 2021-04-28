@@ -20,16 +20,18 @@ const FuelQuoteForm = () => {
     const username = sessionStorage.getItem('username') ? sessionStorage.getItem('username') : "";
     Axios.get(`http://127.0.0.1:8000/api/profile-list-user/${username}/`)
       .then((res) => {
-        if(res.data[0]) {
-          setAddress((res.data[0].address1+" "+res.data[0].address2).trim());
+        if (res.data[0]) {
+          setAddress(
+            (res.data[0].address1 + " " + res.data[0].address2).trim()
+          );
+        } else {
+          setAddress("");
         }
       });
     Axios.get(`http://127.0.0.1:8000/api/quote-price/${username}/1/`)
       .then((res) => {
         if(res.data[0]) {
           setPricePerGallon(res.data);
-        } else {
-          setAddress("");
         }
       });
     Axios.get(`http://127.0.0.1:8000/api/quote-list-user/${username}/`)
