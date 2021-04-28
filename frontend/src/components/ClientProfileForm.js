@@ -16,7 +16,7 @@ const ClientProfileForm = (props) => {
     const [city, setCity]= useState();
     const [usState, setUsState] = useState();
     const [zipcode, setZipCode] = useState();
-    const [errorMessage, setErrorMessage] = useState();
+    const [message, setMessage] = useState();
 
     //fetchProfile();
     useEffect(() => {
@@ -49,16 +49,30 @@ const ClientProfileForm = (props) => {
             zipcode: zipcode
         };
 
-        // TODO: modify variables so uploads for the current user
-        axios.post("http://127.0.0.1:8000/api/profile-create/", clientInformationObject)
-        .then(res => {
-            // console.log(res);
-            //console.log(res.data);
-        });
-        
+				
+				const currentUserName = sessionStorage.getItem('username');
+				axios.get(`http://127.0.0.1:8000/api/profile-list-user/${currentUserName}/`)
+				.then(res => {
+					if(res.data.length===0){// if no data, create profile
+						// TODO: modify variables so uploads for the current user
+						axios.post("http://127.0.0.1:8000/api/profile-create/", clientInformationObject)
+						.then(res => {
+								setMessage("Created");
+						});
+					}
+					else{//update profile
+						axios.post(`http://127.0.0.1:8000/api/profile-update/${currentUserName}/`, clientInformationObject)
+						.then(res => {
+								// console.log(res);
+								//console.log(res.data);
+								setMessage("Updated");
+						});
+					}
+					});
+
         sessionStorage.setItem('clientInformation', JSON.stringify(clientInformationObject));
         // redirect to Fuel Quote Page
-        props.history.push('/fuelquote'); //Home
+        //props.history.push('/fuelquote'); //Home
     };
 
     return (
@@ -191,7 +205,7 @@ const ClientProfileForm = (props) => {
 
 										<p className="text-danger text-left">
 											<small>
-												{ errorMessage }
+												{ message }
 											</small>
 										</p>
                 </form>
