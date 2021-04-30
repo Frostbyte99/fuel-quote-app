@@ -56,17 +56,17 @@ class TestUrls(SimpleTestCase):
         url = reverse('user-create')
         self.assertEquals(resolve(url).func, userCreate)
 
-    def test_user_get_UUID_url_resolves(self):
-        url = reverse('user-getUserUUID', args=[1])
-        self.assertEquals(resolve(url).func, getUserUUID)
+    # def test_user_get_UUID_url_resolves(self):
+    #     url = reverse('user-getUserUUID', args=[1])
+    #     self.assertEquals(resolve(url).func, getUserUUID)
 
-    def test_user_is_unique_url_resolves(self):
-        url = reverse('user-isUserUnique', args=[1])
-        self.assertEquals(resolve(url).func, isUserUnique)
+    # def test_user_is_unique_url_resolves(self):
+    #     url = reverse('user-isUserUnique', args=[1])
+    #     self.assertEquals(resolve(url).func, isUserUnique)
 
-    def test_user_username_resolves(self):
-        url = reverse('user-getUserName', args=[1])
-        self.assertEquals(resolve(url).func, getUserName)
+    # def test_user_username_resolves(self):
+    #     url = reverse('user-getUserName', args=[1])
+    #     self.assertEquals(resolve(url).func, getUserName)
 
     # def test_[...]_url_resolves(self):
     #     url = reverse('...')
