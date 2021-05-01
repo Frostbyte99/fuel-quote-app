@@ -23,7 +23,7 @@ urlpatterns = [
 	# User API
 	path('user-list/', views.userList, name="user-list"),
 	path('user-create/', views.userCreate, name="user-create"),
-	path('user-isUserUnique/<str:pk>/', views.isUserUnique, name="user-isUserUnique"),
-	path('user-getUserName/<str:pk>/', views.getUserName, name="user-getUserName"),
+	# path('user-isUserUnique/<str:pk>/', views.isUserUnique, name="user-isUserUnique"),
+	# path('user-getUserName/<str:pk>/', views.getUserName, name="user-getUserName"),
 	
 ]
