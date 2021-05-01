@@ -234,20 +234,17 @@ def userCreate(request):
 
 	return Response(serializer.data)
 
-@api_view(['GET'])
-def isUserUnique(request, pk):
-	user = UserCredentials.objects.get(userName=pk)
-	serializer = UserSerializer(user, many=False)
+# @api_view(['GET'])
+# def isUserUnique(request, pk):
+# 	user = UserCredentials.objects.get(userName=pk)
+# 	serializer = UserSerializer(user, many=False)
+# 	if pk == serializer.data['userID']:
+# 		return Response('True')
+# 	else:
+# 		return Response('False')
 
-	if pk == serializer.data['userID']:
-		return Response('True')
-	else:
-		return Response('False')
-
-
-@api_view(['GET'])
-def getUserName(request, pk):
-	user = UserCredentials.objects.get(userID=pk)
-	serializer = UserSerializer(user, many=False)
-
-	return Response(serializer.data['userName'])
+# @api_view(['GET'])
+# def getUserName(request, pk):
+# 	user = UserCredentials.objects.get(userID=pk)
+# 	serializer = UserSerializer(user, many=False)
+# 	return Response(serializer.data['userName'])
