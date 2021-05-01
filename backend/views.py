@@ -103,7 +103,7 @@ def profileUpdate(request, name):
 @permission_classes((AllowAny,))
 @api_view(['DELETE'])
 def profileDelete(request, pk):
-	profile = ClientInformation.objects.get(id=pk)
+	profile = ClientInformation.objects.get(userName=pk)
 	profile.delete()
 
 	return Response('Profile item deleted')
